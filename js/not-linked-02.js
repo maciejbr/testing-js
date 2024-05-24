@@ -466,4 +466,168 @@ function createFileName(name, ext) {
 }
 console.log(createFileName("report ", "csv")); // report.csv
 
+//----- PĘTLE -----//
+//--- while - może nie wykonać się ani razu
+let count = 0;
+
+while (count < 10) {
+  console.log(`Count: ${count}`);
+  count += 1;
+}
 //---
+let clientCounter = 18;
+const maxClients = 25;
+
+while (clientCounter < maxClients) {
+  console.log(clientCounter);
+  clientCounter += 1;
+}
+//---
+// zwraca sumę wszystkich liczb całkowitych od jeden do tej liczby włącznie
+function calculateTotal(number) {
+  let totalNumber = 0;
+  let i = 1;
+  while (i <= number) {
+    totalNumber += i;
+    i++;
+  }
+  return totalNumber;
+}
+console.log(calculateTotal(3)); // 6
+console.log(calculateTotal(24)); // 300
+//------
+// do ... while - wykonuje się co najmniej raz
+let count = 0;
+
+do {
+  console.log(`Count: ${count}`);
+  count += 1;
+} while (count < 5);
+
+// pętla FOR posiada zmienną-licznik LET
+for (inicjalizacja; warunek; post - wyrażenie) {
+  statement;
+}
+for (initialization; condition; afterthought) {
+  statement;
+}
+//
+
+for (let i = 0; i <= 20; i += 5) {
+  console.log(i);
+}
+// 0, 5, 10, 15, 20
+
+//
+for (let i = 20; i >= 0; i -= 5) {
+  console.log(i);
+}
+// 20, 15, 10, 5, 0
+
+// zwraca sumę wszystkich liczb całkowitych od jeden do tej liczby włącznie
+function calculateTotal(number) {
+  let total = 0;
+  for (let i = 1; i <= number; i++) {
+    total += i;
+  }
+  return total;
+}
+console.log(calculateTotal(4)); // 10
+//
+
+// Inkrementacja
+// Prefiksowa inkrementacja (++value) najpierw zwiększa wartość zmiennej, a potem używa nowej wartości w wyrażeniu.
+let x = 5;
+const y = ++x;
+console.log(x); // 6
+console.log(y); // 6
+
+// Postfiksowa inkrementacja (value++) najpierw używa bieżącej wartości zmiennej w wyrażeniu, a następnie wykonuje zwiększenie wartości.
+let x = 5;
+const y = x++;
+console.log(x); // 6
+console.log(y); // 5
+
+// Dekrementacja
+// Prefiksowa dekrementacja (--value) najpierw zmniejsza wartość zmiennej, a potem używa nowej wartości w wyrażeniu.
+let x = 5;
+const y = --x;
+console.log(x); // 4
+console.log(y); // 4
+
+// Postfiksowa dekrementacja (value--) najpierw używa bieżącej wartości zmiennej w wyrażeniu, a następnie wykonuje zmniejszenie wartości.
+let x = 5;
+const y = x--;
+console.log(x); // 4
+console.log(y); // 5
+//----
+for (let i = 0; i <= 5; i++) {
+  console.log(i);
+}
+// 0, 1, 2, 3, 4, 5
+
+//
+// zwraca sumę wszystkich parzystych liczb całkowitych od 1 do tej liczby włącznie
+function calculateEvenTotal(number) {
+  let total = 0;
+  for (let i = 1; i <= number; i++) {
+    if (i % 2 === 0) {
+      total += i;
+    }
+  }
+  return total;
+}
+console.log(calculateEvenTotal(6)); // 2 + 4 + 6 = 12
+//
+
+// Aby do zmiennej number została zapisana pierwsza liczba w przedziale od start do end, która jest podzielna przez 5 bez reszty
+
+const start = 6;
+const end = 17;
+let number;
+
+for (let i = start; i <= end; i++) {
+  if (i % 5 === 0) {
+    number = i;
+    break;
+  }
+}
+console.log(number);
+//-----
+
+function findNumberFromFive(max, target) {
+  console.log("Log in the body of the function before the cycle");
+
+  for (let i = 5; i <= max; i += 1) {
+    console.log("Current counter value i:", i);
+
+    if (i === target) {
+      console.log(`Found the number ${target}, interrupt the cycle`);
+      break;
+    }
+  }
+
+  console.log("Log in body function after cycle");
+}
+
+findNumberFromFive(20, 8);
+console.log("Log after exiting function");
+// Log in the body of the function before the cycle
+// 5, 6, 7, 8;
+//Found the number 8, interrupt the cycle;
+// Log in body function after cycle,
+// Log after exiting function
+
+//----------
+function getFileName(file) {
+  const endIndex = file.indexOf(".");
+  if (endIndex === -1) {
+    return file;
+  } else {
+    return file.slice(0, endIndex);
+  }
+}
+console.log(getFileName("styles.css"));
+// Sprawdzała ona obecność rozszerzenia w nazwie pliku (nazwa rozszerzenia powinna być oddzielona od nazwy pliku kropką)
+// Jeśli nazwa pliku nie zawiera rozszerzenia, aby zwracała nowy podciąg zawierający nazwę pliku bez zmian
+//W przeciwnym razie zwracała podciąg z nazwą pliku, ale bez rozszerzenia
