@@ -319,6 +319,21 @@ function calculateTotalPrice(order) {
 console.log(calculateTotalPrice([12, 85, 37, 4])); // 138
 //------
 
+// Funkcja getEvenNumbers(start, end) ma dwa parametry start i end, które są liczbami całkowitymi. Uzupełnij kod funkcji tak, aby zwracała ona tablicę wszystkich liczb parzystych od start do end. Jeśli nie ma liczb parzystych, tablica musi być pusta. Liczba parzysta to liczba, która jest podzielna przez 2 bez reszty (10 % 2 == 0). Użyj pętli for.
+
+function getEvenNumbers(start, end) {
+  const evenNumbers = [];
+
+  for (let i = start; i <= end; i += 1) {
+    if (i % 2 === 0) {
+      evenNumbers.push(i);
+    }
+  }
+  return evenNumbers;
+}
+console.log(getEvenNumbers(3, 11)); // [4, 6, 8, 10]
+console.log(getEvenNumbers(6, 12)); // [6, 8, 10, 12]
+
 //-----  Metoda tablicowa includes()
 
 const planets = ["Earth", "Mars", "Venus"];
