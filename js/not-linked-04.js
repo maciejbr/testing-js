@@ -392,7 +392,7 @@ console.log(countProps({ mail: "poly@mail.com", isOnline: true, score: 500 })); 
 function countTotalSalary(salaries) {
   let totalSalary = 0;
   const values = Object.values(salaries);
-  for (value of values) {
+  for (let value of values) {
     totalSalary += value;
   }
   return totalSalary;
