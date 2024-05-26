@@ -281,3 +281,112 @@ for (const key of keys) {
   console.log(book[key]); // Wartość właściwości
 }
 // Przeglądamy tablicę kluczy obiektu i na każdej iteracji otrzymujemy klucz i wartość właściwości.
+
+//---------  Iteracja obiektu ----------
+// W przeciwieństwie do tablicy lub ciągu znaków, obiekt to nie jest iterowalna jednostka, co oznacza, że nie można go przeglądać za pomocą pętli for lub for...of.
+// Do iteracji po obiektach używa się specjalnej pętli for...in, która przegląda klucze obiektu object.
+
+for (key in object) {
+  // instrukcje
+}
+
+//Zmienna key jest dostępna tylko w ciele pętli.
+// W każdej iteracji zostanie do niej przypisana wartość klucza (nazwa) właściwości.
+Aby uzyskać wartość właściwości o takim kluczu (nazwie), używany jest składnia nawiasów kwadratowych.
+
+const book = {
+  title: "Ostatnie Królestwo",
+  author: "Bernard Cornwell",
+  genres: ["proza historyczna", "przygoda"],
+  rating: 8.38,
+};
+
+for (const key in book) {
+  console.log(key); // Klucz
+  console.log(book[key]); // Wartość właściwości o takim kluczu
+}
+
+// Wbudowana klasa Object posiada kilka użytecznych metod do pracy z obiektami.
+// Pierwszą z nich jest Object.keys(object), która przyjmuje obiekt i zwraca tablicę kluczy jego właściwości. Jeśli obiekt nie posiada właściwości, metoda zwróci pustą tablicę.
+const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  rating: 8.38,
+};
+const keys = Object.keys(book);
+console.log(keys); // ['title', 'author', 'genres', 'rating']
+
+// Połączenie wyniku Object.keys() i pętli for...of umożliwia wygodne przeglądanie właściwości obiektu bez użycia pętli for...in.
+
+const book = {
+  author: "Bernard Cornwell",
+  genres: ["proza historyczna", "przygoda"],
+  rating: 8.38,
+};
+const keys = Object.keys(book);
+
+for (const key of keys) {
+  console.log(key); // Klucz
+  console.log(book[key]); // Wartość właściwości
+}
+// Przeglądamy tablicę kluczy obiektu i na każdej iteracji otrzymujemy klucz i wartość właściwości.
+
+// Jeśli metoda Object.keys(object) zwraca tablicę nazw właściwości obiektu (czyli kluczy), to metoda Object.values(object) zwraca tablicę wartości jego właściwości.
+// Jeśli obiekt nie posiada właściwości, metoda Object.values(object) zwróci pustą tablicę.
+
+const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  rating: 8.38,
+};
+const keys = Object.keys(book);
+console.log(keys); // ["title", "author", "genres", "rating"]
+
+const values = Object.values(book);
+console.log(values); // ["The Last Kingdom", "Bernard Cornwell", 8.38]
+
+
+// Zapisz do zmiennej keys tablicę kluczy właściwości obiektu apartment, a do zmiennej values tablicę ich wartości. Użyj metod Object.keys() i Object.values().
+const apartment = {
+  descr: "Spacious apartment in the city center",
+  rating: 4,
+  price: 2153,
+};
+
+const keys = Object.keys(apartment);
+const values = Object.values(apartment);
+
+// Przejdź przez obiekt apartment używając metody Object.keys() i pętli for...of. Zapisz do zmiennej keys tablicę kluczy właściwości obiektu apartment i dodaj do tablicy values wszystkie wartości jego właściwości.
+
+const apartment = {
+  descr: "Spacious apartment in the city center",
+  rating: 4,
+  price: 2153,
+};
+const values = Object.values(apartment);
+const keys = Object.keys(apartment);
+
+for (const key of keys) {
+  console.log(keys);
+  console.log(values);
+}
+//----
+function countProps(object) {
+  let propCount = 0;
+
+  const keys = Object.keys(object);
+
+  for (const key in object) {
+    if (object.hasOwnProperty(key)) {
+      propCount += 1;
+    }
+  }
+
+  return propCount;
+}
+console.log(countProps({ name: "Mango", age: 2 })); // 2
+console.log(countProps({ mail: "poly@mail.com", isOnline: true, score: 500 })); //3
+//---
+
+//-------  Tablica obiektów
