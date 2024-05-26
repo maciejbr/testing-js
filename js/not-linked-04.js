@@ -388,5 +388,38 @@ function countProps(object) {
 console.log(countProps({ name: "Mango", age: 2 })); // 2
 console.log(countProps({ mail: "poly@mail.com", isOnline: true, score: 500 })); //3
 //---
+function countTotalSalary(salaries) {
+  let totalSalary = 0;
+  const values = Object.values(salaries);
+  for (value of values) {
+    totalSalary += value;
+  }
+  return totalSalary;
+}
+console.log(countTotalSalary({ kiwi: 200, poly: 50, ajax: 150 }))
 
 //-------  Tablica obiektów
+
+const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 7.75,
+  },
+];
+for (const book of books) {
+  console.log(book); // Obiekt książki
+  console.log(book.title); // Tytuł
+  console.log(book.author); // Autor
+  console.log(book.rating); // Ocena
+}
