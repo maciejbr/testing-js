@@ -188,4 +188,178 @@ function filterArray(numbers, value) {
 
 console.log(filterArray([12, 24, 8, 41, 76], 38)); // [41, 76]
 
-//-------
+//------- Funkcje strzałkowe --------
+
+// Funkcje strzałkowe (slangowo "strzałki") mają krótszą, bardziej zwięzłą składnię, która zmniejsza ilość kodu, zwłaszcza gdy funkcja jest mała lub gdy jest używana jako wywołanie zwrotne.
+// Wszystkie strzałki są tworzone jako wyrażenie funkcji i muszą być przypisane do zmiennej.
+
+// Zwykła deklaracja funkcji
+function classicAdd(a, b, c) {
+  return a + b + c;
+}
+
+// To samo, ale za pomocą funkcji strzałkowej
+const arrowAdd = (a, b, c) => {
+  return a + b + c;
+};
+
+// Słowo kluczowe function nie jest używane.
+// Parametry są deklarowane natychmiast.
+// Po parametrach następuje symbol => i ciało funkcji w nawiasach klamrowych.
+// Jeśli istnieje kilka parametrów, należy je oddzielić przecinkami w nawiasach, pomiędzy znakiem równości = i strzałką =>.
+
+const add = (a, b, c) => {
+  return a + b + c;
+};
+
+// Jeśli jest tylko jeden parametr, można go zadeklarować bez nawiasów
+
+const add = (a) => {
+  return a + 5;
+};
+
+// Jeśli nie ma parametrów, konieczne są puste nawiasy.
+
+const greet = () => {
+  console.log("Hello!");
+};
+
+// Dokonaj refaktoryzacji funkcji calculateTotalPrice(), aby była zadeklarowana jako funkcja strzałkowa.
+
+function calculateTotalPrice(quantity, pricePerItem) {
+  return quantity * pricePerItem;
+}
+
+const calculateTotalPrice = (quantity, pricePerItem) => {
+  return quantity * pricePerItem;
+};
+// Ciało funkcji strzałkowej znajduje się po symbolu =>.
+// Istnieją dwa sposoby zapisu: z nawiasami klamrowymi i bez nich.
+
+// Zapis z nawiasami klamrowymi
+// Jeżeli funkcja ma nawiasy klamrowe i musi zwrócić wartość, należy jawnie ustawić return. Nazywa się to zwrotem jawnym (explicit return).
+
+const add = (a, b, c) => {
+  console.log(a, b, c);
+  return a + b + c;
+};
+// Ta składnia jest używana, gdy oprócz zwracania wartości musisz wykonać jakieś inne instrukcje w ciele funkcji.
+
+// Zapis bez nawiasów klamrowych
+// Jeśli funkcja jest bez nawiasów klamrowych, zwracany jest wynik wyrażenia następującego po =>. Nazywa się to zwrotem niejawnym (implicit return). W przykładzie zwracany jest wynik wyrażenia dodawania parametrów a, b i c.
+
+const add = (a, b, c) => a + b + c;
+
+// Składnia niejawnego zwracania znacznie zmniejsza "hałas" związany z deklarowaniem funkcji z ciałem i wartością zwracaną. Jest ona jednak odpowiednia tylko wtedy, gdy w ciele funkcji nie trzeba wykonywać żadnych dodatkowych instrukcji poza zwróceniem wartości.
+
+// Klasyczna
+function classicAdd(a, b, c) {
+  return a + b + c;
+}
+
+// Stzałkowa
+const arrowAdd = (a, b, c) => a + b + c;
+
+// Dokonaj refaktoryzacji funkcji calculateTotalPrice(), aby używała niejawnego zwracania.
+
+const calculateTotalPrice = (quantity, pricePerItem) => quantity * pricePerItem;
+
+//----
+// Funkcje strzałkowe nie mają zmiennej lokalnej arguments, która zawiera wszystkie argumenty. Jeśli potrzebne jest zebranie wszystkich argumentów w tablicy, należy użyć operacji rest.
+
+const add = (...args) => {
+  console.log(args);
+};
+
+add(1, 2, 3); // [1, 2, 3]
+
+// Anonimowe funkcje strzałkowe świetnie nadają się do wywołań zwrotnych iteratorów tablic ze względu na krótszą składnię deklaracji, zwłaszcza jeśli kod w ciele funkcji nie jest zbyt złożony.
+
+const numbers = [5, 10, 15, 20, 25];
+
+// Zwykła funkcja anonimowa
+numbers.forEach(function (number, index) {
+  console.log(`Index ${index}, value ${number}`);
+});
+
+// Strzałkowa funkcja anonimowa
+numbers.forEach((number, index) => {
+  console.log(`Index ${index}, value ${number}`);
+});
+
+// Możesz również zadeklarować funkcję zwrotną osobno i przekazać do niej odwołanie. Należy to zrobić, jeśli pojedyncza funkcja jest używana w kilku miejscach w programie lub jeśli jest ona złożona.
+
+const numbers = [5, 10, 15, 20, 25];
+
+const logMessage = (number, index) => {
+  console.log(`Index ${index}, value ${number}`);
+};
+
+numbers.forEach(logMessage);
+
+// Dokonaj refaktoryzacji funkcji calculateTotalPrice(orderedItems), zastępując jej deklarację funkcją strzałkową. Zastąp również funkcję callback przekazywaną do metody forEach() funkcją strzałkową.
+
+// Przed
+function calculateTotalPrice(orderedItems) {
+  let totalPrice = 0;
+
+  orderedItems.forEach(function (item) {
+    totalPrice += item;
+  });
+
+  return totalPrice;
+}
+
+// Po
+const calculateTotalPrice = (orderedItems) => {
+  let totalPrice = 0;
+
+  orderedItems.forEach((item) => {
+    totalPrice += item;
+  });
+
+  return totalPrice;
+};
+
+//------------
+
+//------------ Metody map і flatMap -----------
+
+// Funkcja z efektem ubocznym — to funkcja, która podczas wykonywania może:
+// zmieniać lub używać zmiennych globalnych,
+// zmieniać wartość argumentów typu referencyjnego,
+// wykonywać operacje wejścia/wyjścia itp.
+
+const dirtyMultiply = (array, value) => {
+  for (let i = 0; i < array.length; i += 1) {
+    array[i] = array[i] * value;
+  }
+};
+
+const numbers = [1, 2, 3, 4, 5];
+dirtyMultiply(numbers, 2);
+// Nastąpiła mutacja oryginalnych danych - tablicy numbers
+console.log(numbers); // [2, 4, 6, 8, 10]
+
+// Funkcja dirtyMultiply(array, value) mnoży każdy element tablicy array przez wartość liczbową value. Zmienia ona (modyfikuje) oryginalną tablicę przez odniesienie.
+
+// Funkcja czysta (pure function) — to funkcja, której wynik zależy tylko od wartości jej argumentów. Mając te same argumenty, zawsze zwraca ten sam wynik i nie ma efektów ubocznych, tj. nie zmienia wartości argumentów.
+// Napiszmy implementację czystej funkcji mnożenia elementów tablicy, która zwraca nową tablicę bez zmiany oryginalnej.
+
+const pureMultiply = (array, value) => {
+  const newArray = [];
+
+  array.forEach((element) => {
+    newArray.push(element * value);
+  });
+
+  return newArray;
+};
+
+const numbers = [1, 2, 3, 4, 5];
+const doubledNumbers = pureMultiply(numbers, 2);
+
+// Nie doszło do mutacji oryginalnych danych
+console.log(numbers); // [1, 2, 3, 4, 5]
+// Funkcja zwróciła nową tablicę ze zmienionymi danymi
+console.log(doubledNumbers); // [2, 4, 6, 8, 10]
