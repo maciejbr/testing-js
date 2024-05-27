@@ -153,3 +153,39 @@ numbers.forEach(function (number, index) {
 });
 
 // Jedynym przypadkiem, w którym należy używać pętli for lub for...of do iteracji po tablicy, jest sytuacja, w której musisz przerwać pętlę. Metody forEach nie możesz przerwać, gdyż będzie ona zawsze iterować po tablicy do końca.
+
+//---------
+
+// Funkcja calculateTotalPrice(orderedItems) przyjmuje jeden parametr orderedItems — tablicę liczb, oraz oblicza całkowitą sumę jej elementów, która jest przechowywana w zmiennej totalPrice i zwracana jako wynik funkcji.
+
+// Dopełnij wywołanie metody forEach, przekazując jej funkcję callback, która przy każdej iteracji dodaje wartość bieżącego elementu tablicy orderedItems do totalPrice.
+
+function calculateTotalPrice(orderedItems) {
+  let totalPrice = 0;
+
+  orderedItems.forEach(function (orderedItems) {
+    totalPrice += orderedItems;
+  });
+
+  return totalPrice;
+}
+
+console.log(calculateTotalPrice([164, 48, 291])); // 503
+
+// Funkcja filterArray(numbers, value) przyjmuje jako pierwszy parametr tablicę liczb numbers i zwraca nową tablicę, zawierającą tylko te elementy oryginalnej tablicy, które są większe niż wartość drugiego parametru value. Jeśli takie wartości nie zostaną znalezione, funkcja zwraca pustą tablicę.
+
+// Dokonaj refaktoryzacji funkcji w taki sposób, aby zamiast pętli for używała metody forEach.
+
+function filterArray(numbers, value) {
+  const result = [];
+  numbers.forEach(function (number) {
+    if (number > value) {
+      result.push(number);
+    }
+  });
+  return result;
+}
+
+console.log(filterArray([12, 24, 8, 41, 76], 38)); // [41, 76]
+
+//-------
