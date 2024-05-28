@@ -37,6 +37,28 @@ let age = 18;
 const isAdult = age >= 18;
 console.log(isAdult); //true
 
+// Operatory nieścisłej równości:
+console.log(5 == 5); // true
+console.log(5 == 3); // false
+console.log(5 != 3); // true
+console.log(5 != 5); // false
+
+// Jest to złe, ponieważ niejawnie rzutuje ciągi znaków i wartości logiczne na liczbę
+console.log(5 == "5"); // true
+console.log(5 != "5"); // false
+console.log(1 == true); // true
+console.log(1 != true); // false
+
+// Operatory ścisłej równości. Dobrze, konwersja typu nie jest wykonywana
+console.log(5 === 5); // true
+console.log(5 === "5"); // false
+console.log(5 !== "5"); // true
+console.log(5 !== 5); // false
+console.log(1 === true); // false
+console.log(1 !== true); // true
+
+// W przeciwieństwie do operatorów nieścisłych, wyrażenia 5 == "5" i 1 == true zwrócą false, ponieważ operandy są różnych typów.
+
 const correctPassword = "jqueryismyjam";
 const userPassword = "mangodab3st";
 const isValid = correctPassword === userPassword;
@@ -106,10 +128,19 @@ console.log((0.1 + 0.2).toFixed(1)); // "0.3"
 console.log((5).toFixed(2)); //  "5.00"
 console.log((8.762195).toFixed(4)); //  "8.7622"
 
+// Funkcje
+
+// Parametry są podawane w nawiasach po nazwie funkcji. Parametry to lista danych, których funkcja oczekuje po wywołaniu.
+
 // Deklaracja parametrów x, y, z
 function multiply(x, y, z) {
   console.log(`Result: ${x * y * z}`);
 }
+
+// Parametry są zmiennymi lokalnymi, które są dostępne tylko w treści funkcji.
+// Parametry są oddzielane przecinkami. Funkcja może mieć dowolną liczbę parametrów lub nie mieć ich wcale — w takim przypadku używane są puste nawiasy.
+// Podczas wywoływania funkcji można przekazać argumenty w nawiasach, które są wartościami zadeklarowanych parametrów funkcji.
+
 // Przekazywanie argumentów
 multiply(2, 3, 5); // "Result: 30"
 multiply(4, 8, 12); // "Result: 384"
@@ -129,12 +160,14 @@ function multiply(x, y, z) {
 const result = multiply(2, 3, 5);
 console.log(result); // 30
 //
+// Jeśli ciało funkcji nie zawiera instrukcji return lub nie wskazuje na konkretną wartość, funkcja zwróci specjalną wartość undefined.
 
 function add(a, b, c) {
   return a + b + c;
 }
 
 console.log(add(15, 27, 10));
+
 //
 function multiply(x, y, z) {
   console.log(`Result: ${x * y * z}`);
@@ -144,3 +177,16 @@ console.log("Log before multiply execution");
 multiply(2, 3, 5); // "Result: 30"
 console.log("Log after multiply execution");
 //
+
+function foo() {
+  // Zmienna lokalna
+  const value = "I'm a local variable";
+  // Można odwołać się do zmiennej globalnej
+  console.log(value); // "I'm a local variable"
+}
+
+foo();
+console.log(value); // ReferenceError: value is not defined
+// Błąd: zmienna lokalna nie jest widoczna poza funkcją
+
+// Zmienna value jest zadeklarowana w ciele funkcji foo, czyli w zakresie lokalnym funkcji, ograniczonym do ciała funkcji. Ta zmienna będzie dostępna tylko wewnątrz funkcji, a próba uzyskania do niej dostępu poza ciałem funkcji spowoduje błąd.
