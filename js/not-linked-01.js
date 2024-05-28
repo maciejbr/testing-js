@@ -1,5 +1,20 @@
 "use strict";
 
+const quantity = 17;
+console.log(typeof quantity); // wyświetli "number"
+
+const message = "JavaScript is awesome!";
+console.log(typeof message); // wyświetli "string"
+
+const isSidebarOpen = false;
+console.log(typeof isSidebarOpen); // wyświetli "boolean"
+
+let username;
+console.log(typeof username); // wyświetli "undefined"
+
+let status = null;
+console.log(typeof status); // wyświetli "object"
+
 let guestName = "Mango";
 let roomNumber = 207;
 // const greeting = `Welcome ${guestName}, your room number is ${roomNumber}!`;
