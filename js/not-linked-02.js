@@ -25,7 +25,7 @@ function checkAge(age) {
   }
 }
 
-console.log(checkAge(21));
+console.log(checkAge(21)); // You are an adult
 //-------------------
 const grade = 85;
 
