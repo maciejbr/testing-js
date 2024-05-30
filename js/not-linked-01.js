@@ -20,12 +20,7 @@ let roomNumber = 207;
 const greeting = `Welcome ${guestName}, your room number is ${roomNumber}!`;
 console.log(greeting); // "Welcome Mango, your room number is 207!"
 
-guestName = "Maciek";
-roomNumber = 203;
-const greeting = `Welcome ${guestName}, your room number is ${roomNumber}!`;
-console.log(greeting); // "Welcome Maciek, your room number is 203!"
-
-console.log(guestName.length); // 6
+console.log(guestName.length); // 5
 
 let username = "Dominika";
 let message = `Username ${username} is ${username.length} characters long.`;
