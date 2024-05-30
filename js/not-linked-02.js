@@ -328,7 +328,8 @@ if (canChat) {
 const message = "JavaScript is awesome";
 console.log(message.length); // 21
 
-// Metody czyli wykonanie czynności
+// Metody czyli wykonanie czynności na obiekcie.
+// Wywołanie metody jest bardzo podobne do dostępu do właściwości, ale na końcu dodaje się nawiasy okrągłe, jak przy wywoływaniu funkcji:
 objectName.method();
 // np.:
 const message = "JavaScript is awesome";
@@ -428,8 +429,6 @@ const str = "Hello, world!";
 
 console.log(str.startsWith("Hello")); // true
 console.log(str.startsWith("hello")); // false (metoda jest wrażliwa na wielkość liter)
-//---
-const str = "Hello, world!";
 
 console.log(str.endsWith("world!")); // true
 console.log(str.endsWith("World!")); // false (metoda jest wrażliwa na wielkość liter)
@@ -446,6 +445,11 @@ console.log(checkFileExtension("styles.css", ".css")); // File extension matches
 console.log(checkFileExtension("app.js", ".html")); // File extension does not match
 
 //----- index Of
+
+// Metoda indexOf() jest używana do wyszukiwania w ciągu znaków. Zwraca:
+// indeks pierwszego wystąpienia (indeks pierwszego znaku) podciągu, jeśli zostanie znaleziony, lub
+// -1, jeśli podciąg nie zostanie odnaleziony
+
 const message = "Welcome to Bahamas!";
 const index = message.indexOf("to");
 console.log(index); // 8
