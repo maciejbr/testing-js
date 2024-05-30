@@ -204,6 +204,7 @@ console.log(Boolean("hello")); // true
 console.log(Boolean("false")); // true
 
 //--------- &&
+// Zwraca wartość ostatniego gdy oba "true", lub tego który pierwszy "false"
 
 console.log("hello" && 5); // 5
 console.log(5 && "hello"); // "hello"
