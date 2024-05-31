@@ -11,6 +11,11 @@ console.log(planets[9]); // undefined
 
 console.log(planets.length); // 3
 
+const fruits = ["apple", "plum", "pear", "orange"];
+firstElement = fruits[0];
+secondElement = fruits[1];
+lastElement = fruits[fruits.length - 1];
+
 const planets = ["Earth", "Mars", "Venus"];
 const firstElement = planets[0];
 console.log(firstElement); // 'Earth'
