@@ -373,6 +373,8 @@ for (const key of keys) {
   console.log(values);
 }
 //----
+// Przeprowadź refaktoryzację funkcji countProps(object), zastępując przeszukiwanie kluczy za pomocą pętli for...in metodą Object.keys(), aby uzyskać tablicę właściwości. Funkcja powinna zwrócić liczbę właściwości w obiekcie object.
+
 function countProps(object) {
   let propCount = 0;
 
@@ -389,6 +391,10 @@ function countProps(object) {
 console.log(countProps({ name: "Mango", age: 2 })); // 2
 console.log(countProps({ mail: "poly@mail.com", isOnline: true, score: 500 })); //3
 //---
+// Funkcja countTotalSalary(salaries) przyjmuje obiekt wynagrodzenia (salaries) jako parametr. Każda właściwość obiektu salaries jest kluczem zawierającym nazwisko pracownika, a wartością jest odpowiadające mu wynagrodzenie.
+
+// Uzupełnij kod funkcji countTotalSalary(salaries) tak, aby zwracała ona całkowitą kwotę wynagrodzeń wszystkich pracowników.
+
 function countTotalSalary(salaries) {
   let totalSalary = 0;
   const values = Object.values(salaries);
@@ -397,7 +403,7 @@ function countTotalSalary(salaries) {
   }
   return totalSalary;
 }
-console.log(countTotalSalary({ kiwi: 200, poly: 50, ajax: 150 }))
+console.log(countTotalSalary({ kiwi: 200, poly: 50, ajax: 150 })) // 400
 
 //-------  Tablica obiektów
 
@@ -565,7 +571,7 @@ obj.method(10); // "I'm a method with 10!"
 // Obiekty, które łączą dane i metody do pracy z tymi danymi, można nazwać "modelami".
 
 // Stwórzmy obiekt bookShelf dla kolekcji książek books i metod interakcji z kolekcją getBooks i addBook.
-//                              ??????????????
+
 // ✅ Logicznie i składniowo pogrupowane jednostki
 const bookShelf = {
   books: ["Ostatnie Królestwo", "Strażnik Marzeń"],
@@ -615,6 +621,7 @@ const bookShelf = {
 };
 
 bookShelf.getBooks(); // {books: ["The Last Kingdom", "The Mist"], getBooks: f}
+
 // Wartością this będzie odniesienie do obiektu przed "kropką", czyli obiektu, który wywołał tę metodę, w naszym przypadku - to odniesienie do obiektu bookShelf.
 
 // Do dostępu do właściwości obiektu w metodach odnosimy się do niego przez this i dalej, standardowo, "przez kropkę" do właściwości.
@@ -794,7 +801,7 @@ const bookShelf = {
 	}
 };
 // Wykonując if, możemy być pewni, że na danej iteracji w zmiennej book znajduje się odniesienie do potrzebnego nam obiektu, ponieważ obiekty są przekazywane przez odniesienie. Teraz wystarczy zwrócić się do właściwości tego obiektu i przypisać jej nową wartość.
-// ????????????????????
+
 const bookShelf = {
   books: [
     { title: "The Last Kingdom", rating: 8 },
@@ -844,7 +851,7 @@ multiply(1, 2); // pseudotablica [1, 2]
 multiply(1, 2, 3); // pseudotablica [1, 2, 3]
 multiply(1, 2, 3, 4); // pseudotablica [1, 2, 3, 4]
 
-// Od standardu ES6 pojawiło się pojęcie parametrów resztkowych (...rest). Jest to specjalny składnia, która pozwala zebrać grupę niezależnych elementów w tablicę.
+// Od standardu ES6 pojawiło się pojęcie parametrów resztkowych (...rest). Jest to specjalna składnia, która pozwala zebrać grupę niezależnych elementów w tablicę.
 
 function multiply(...args) {
   console.log(args);
@@ -884,7 +891,22 @@ multiply(1, 2); // 1 2
 multiply(1, 2, 3); // 1 2 [3] 
 multiply(1, 2, 3, 4); // 1 2 [3, 4]
 
-//////////////////////
+// Funkcja addOverNum() przyjmuje dowolną liczbę argumentów liczbowych.
+
+// Uzupełnij kod funkcji tak, aby obliczała sumę tylko tych argumentów, które są większe od podanej liczby. Liczba ta będzie zawsze przekazywana jako pierwszy argument.
+
+function addOverNum(value, ...args) {
+  let sum = 0;
+  for (const arg of args) {
+    if (arg > value) {
+      sum += arg
+    }
+  }
+  return sum
+}
+
+console.log(addOverNum(10, 12, 4, 11, 48, 10, 8)); // 71
+
 
 // Czasami potrzebne jest zrobienie odwrotności — przekazać tablicę element po elemencie do funkcji, która jest wywoływana. Na przykład jest wbudowana funkcja Math.max(), która szuka i zwraca największy z argumentów (liczb), tj. oczekuje nie tablicy wartości, ale dowolnej liczby argumentów.
 // Tutaj przyda się operator rozproszenia ...spread.
@@ -898,6 +920,23 @@ console.log(...temps); // 14 -4 25 8 11  zestaw pojedynczych liczb
 console.log(Math.max(...temps)); // 25
 
 console.log(...[1, 2, 3]); // wyświetli 1 2 3
+
+// Funkcja getExtremeScores(scores) przyjmuje tablicę ocen (liczb) w parametrze scores.
+
+// Uzupełnij kod funkcji tak, aby zwracała obiekt z dwiema właściwościami:
+// Właściwość best musi zawierać największą liczbę z tablicy scores
+// Właściwość worst musi zawierać najmniejszą liczbę z tablicy scores.
+// Użyj operatora (...spread) i metod Math.max() i Math.min().
+
+function getExtremeScores(scores) {
+  return {
+    best: Math.max(...scores),
+    worst: Math.min(...scores),
+  }
+}
+
+console.log(getExtremeScores([19, 7, 4, 17, 81, 24])); // { best: 81, worst: 4 }
+
 
 // Operacja ...spread pozwala na stworzenie kopii tablicy lub „połączenie” dowolnej liczby tablic w jedną nową. Dotychczas wykorzystywano do tego metody slice() i concat(), ale operacja rozproszenia umożliwia zrobienie tego samego w krótszej formie.
 
@@ -957,3 +996,25 @@ console.log(fourth); // { propA: 5, propB: 20, propC: 15 }
 
 const fifth = { ...first, propB: 20, ...second };
 console.log(fifth); // { propA: 5, propB: 20, propC: 15 }
+
+// W konstruktorze możesz tworzyć nowe testy, które mają domyślne ustawienia przechowywane w zmiennej defaultSettings. Podczas tworzenia testu, wszystkie lub część ustawień może zostać zastąpiona, ustawienia niestandardowe są przechowywane w zmiennej overrideSettings.
+
+// Aby uzyskać końcowe ustawienia testu, należy wziąć ustawienia domyślne i zastosować do nich nadpisane ustawienia niestandardowe. Uzupełnij kod tak, aby zmienna finalSettings zawierała obiekt końcowych ustawień testu.
+
+const defaultSettings = {
+  theme: "light",
+  public: true,
+  withPassword: false,
+  minNumberOfQuestions: 10,
+  timePerQuestion: 60,
+};
+const overrideSettings = {
+  public: false,
+  withPassword: true,
+  timePerQuestion: 30,
+};
+
+const finalSettings = {
+  ...defaultSettings,
+  ...overrideSettings
+};
