@@ -35,7 +35,7 @@ let age = 18;
 const isAdult = age >= 18;
 console.log(isAdult); //true
 
-// Operatory nieścisłej równości:
+// Operatory nieścisłej równości, sprawdzają czy wartości operandów są równe
 console.log(5 == 5); // true
 console.log(5 == 3); // false
 console.log(5 != 3); // true
