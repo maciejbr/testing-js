@@ -26,6 +26,8 @@ let username = "Dominika";
 let message = `Username ${username} is ${username.length} characters long.`;
 console.log(message); // Username Dominika is 8 characters long.
 
+// składnia szablonów łańcuchowych (string templates):  ${text}
+
 const product = "Repair droid";
 console.log(product[product.length - 1]); // 'd'
 
