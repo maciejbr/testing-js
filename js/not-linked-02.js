@@ -18,7 +18,7 @@ if (subscription === "pro") {
 }
 
 console.log(price); // 0
-//------------------
+//------------------ If jest W funkcji !
 function checkAge(age) {
   if (age >= 18) {
     return `You are an adult`;
@@ -111,7 +111,8 @@ function checkPassword(password) {
     : "Access denied, wrong password!";
 }
 console.log(checkPassword("jqueryismyjam")); // Access granted
-//--------------------
+
+//-------------------- Switch
 
 const fruit = "apple";
 
