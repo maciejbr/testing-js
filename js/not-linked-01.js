@@ -164,7 +164,7 @@ function add(a, b, c) {
   return a + b + c;
 }
 
-console.log(add(15, 27, 10));
+console.log(add(15, 27, 10)); // 52
 
 //
 function multiply(x, y, z) {
