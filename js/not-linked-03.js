@@ -178,7 +178,7 @@ console.log(calculateEngravingPrice("JavaScript is in my blood", 10)); // 50
 // by konwertowała tablicę na ciąg znaków bez separatorów i zwracała liczbę znaków w wynikowym ciągu.
 
 function getLength(array) {
-  const arrayToNumber = array.join("").split(""); // wszytko złączyć a potem rozdzielić na zanki
+  const arrayToNumber = array.join("").split(""); // wszytko złączyć a potem rozdzielić na znaki
   return arrayToNumber.length;
 }
 console.log(getLength(["Mango", "hurries", "to", "the", "train"])); // 22 znaki
