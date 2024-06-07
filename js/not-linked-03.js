@@ -275,7 +275,8 @@ for (let i = 0; i < 3; i += 1) {
 
 console.log(tags); // ["tag-0", "tag-1", "tag-2"]
 //-----
-
+// Metoda sort()
+//-----
 // Funkcja createArrayOfNumbers(min, max) przyjmuje dwa parametry:
 // min - liczba całkowita, od której rozpoczynają się obliczenia
 // max - liczba całkowita, do której włącznie będą wykonywane obliczenia
