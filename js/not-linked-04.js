@@ -937,7 +937,6 @@ function getExtremeScores(scores) {
 
 console.log(getExtremeScores([19, 7, 4, 17, 81, 24])); // { best: 81, worst: 4 }
 
-
 // Operacja ...spread pozwala na stworzenie kopii tablicy lub „połączenie” dowolnej liczby tablic w jedną nową. Dotychczas wykorzystywano do tego metody slice() i concat(), ale operacja rozproszenia umożliwia zrobienie tego samego w krótszej formie.
 
 const temps = [14, -4, 25, 8, 11];
