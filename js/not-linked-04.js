@@ -655,7 +655,7 @@ console.log(bookShelf.books); // ["The Last Kingdom", "The Mist"]
 
 // W poniższym przykładzie w słowie kluczowym this przechowywana jest referencja do obiektu, który wywołał odpowiednią metodę.
 
-// Podczas odwoływania się do this.books wewnątrz metody, odnosimy się do tablicy przechowywanej w właściwości books. Oznacza to, że można ją zmieniać przez referencję, na przykład używając metody tablicy push() do dodawania nowego elementu.
+// Podczas odwoływania się do this.books wewnątrz metody, odnosimy się do tablicy przechowywanej we właściwości books. Oznacza to, że można ją zmieniać przez referencję, na przykład używając metody tablicy push() do dodawania nowego elementu.
 
 const bookShelf = {
   books: ["The Last Kingdom"],
