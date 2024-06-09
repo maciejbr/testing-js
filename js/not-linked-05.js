@@ -433,6 +433,8 @@ function changeEven(numbers, value) {
   }
 }
 
+// Po (do dokończenia)
+
 function changeEven(numbers, value) {
   const newNumbers = [];
   {
@@ -442,4 +444,126 @@ function changeEven(numbers, value) {
   }
   return newNumbers;
 }
-// Po
+
+//----
+// Większość iteratorów tablicowych to czyste funkcje. Tworzą one nową tablicę, wypełniają ją poprzez zastosowanie określonej funkcji zwrotnej do wartości każdego elementu, a następnie zwracają tę nową tablicę.
+// Metoda map(callback) jest używana do przekształcania tablicy. Wywołuje ona funkcję zwrotną dla każdego elementu oryginalnej tablicy i zapisuje wynik swojej pracy do nowej tablicy, która będzie wynikiem metody.
+
+array.map((element, index, array) => {
+  // Ciało funkcji wywołania zwrotnego
+});
+
+// Iteruje po oryginalnej tablicy element po elemencie,
+// Nie zmienia oryginalnej tablicy,
+// Wynik funkcji zwrotnej jest zapisywany w nowej tablicy,
+// Zwraca nową tablicę o tej samej długości co tablica, do której została zastosowana.
+// Może być użyta do zmiany każdego elementu tablicy. Oryginalna tablica jest używana jako wzorzec, na podstawie którego budowana jest następna kolekcja.
+
+const planets = ["Earth", "Mars", "Venus", "Jupiter"];
+
+const planetsInUpperCase = planets.map((planet) => planet.toUpperCase());
+console.log(planetsInUpperCase); // ["EARTH", "MARS", "VENUS", "JUPITER"]
+
+const planetsInLowerCase = planets.map((planet) => planet.toLowerCase());
+console.log(planetsInLowerCase); // ["earth", "mars", "venus", "jupiter"]
+
+// Oryginalna tablica nie uległa zmianie
+console.log(planets); // ["Earth", "Mars", "Venus", "Jupiter"]
+
+// Korzystanie z anonimowych funkcji strzałkowych z niejawnym zwrotem znacznie zmniejsza "hałas" deklaracji funkcji zwrotnej, dzięki czemu kod jest czystszy i łatwiejszy do odczytania.
+
+//----
+// Tablica planets zawiera nazwy planet. Dopełnij kod tak, aby zmienna planetsLengths zawierała tablicę składającą się z długości nazw każdej planety w tablicy planets. Należy użyć metody map(). (do dokończenia)
+
+const planets = ["Earth", "Mars", "Venus", "Jupiter"];
+
+const planetsLengths = planets.map((planet) => planet.length());
+
+// Wiemy już, że typowym zadaniem jest manipulowanie tablicą obiektów, na przykład po to, aby uzyskać tablicę wartości właściwości ze wszystkich obiektów. Mamy tablicę studentów i musimy uzyskać oddzielną tablicę ich nazwisk.
+
+const students = [
+  { name: "Mango", score: 83 },
+  { name: "Poly", score: 59 },
+  { name: "Ajax", score: 37 },
+  { name: "Kiwi", score: 94 },
+  { name: "Houston", score: 64 },
+];
+
+const names = students.map((student) => student.name);
+console.log(names); // ["Mango", "Poly", "Ajax", "Kiwi", "Houston"]
+
+// Korzystając z metody map(), możesz iterować po tablicy obiektów i zwracać wartość właściwości każdego z nich w funkcji callback.
+// Metoda flatMap(callback) jest podobna do metody map(), ale jest używana, gdy wynikiem jest wielowymiarowa tablica, która wymaga "wygładzenia".
+
+array.flatMap((element, index, array) => {
+  // Ciało funkcji wywołania zwrotnego
+});
+
+// Tablica students przechowuje kolekcję studentów z listą kursów, na które dany student uczęszcza we właściwości courses. Kilku studentów może uczęszczać na ten sam kurs. Należy utworzyć listę wszystkich kursów, w których uczestniczy ta grupa studentów, nawet jeśli się powtarzają.
+
+const students = [
+  { name: "Mango", courses: ["mathematics", "physics"] },
+  { name: "Poly", courses: ["science", "mathematics"] },
+  { name: "Kiwi", courses: ["physics", "biology"] },
+];
+
+const mappedCourses = students.map((student) => student.courses);
+console.log(mappedCourses); // [["mathematics", "physics"], ["science", "mathematics"], ["physics", "biology"]]
+
+const flattenedCourses = students.flatMap((student) => student.courses);
+console.log(flattenedCourses); // ["mathematics", "physics", "science", "mathematics", "physics", "biology"];
+
+// Metoda flatMap wywołuje funkcję zwrotną dla każdego elementu oryginalnej tablicy i zapisuje wynik swojej pracy do nowej tablicy. Różnica w stosunku do map() polega na tym, że nowa tablica jest "wygładzana" do głębokości równej jeden (jedno zagnieżdżenie). Ta wygładzona (płaska) tablica jest wynikiem działania funkcji flatMap().
+
+//---
+
+// Tablica books zawiera kolekcję obiektów książek, z których każdy zawiera właściwości title, author, rating. Używając metody map(), spraw, aby zmienna titles zawierała tablicę tytułów wszystkich książek (właściwość title) z tablicy books. (do zrobienia)
+
+const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 7.75,
+  },
+  { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
+  { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
+];
+
+const titles = books;
+
+//-----
+// Tablica books zawiera kolekcję obiektów książek, z których każdy zawiera właściwość genres, której wartością jest tablica gatunków. Używając metody flatMap(), spraw by zmienna genres zawierała tablicę gatunków wszystkich książek (właściwość genres) z tablicy books.
+
+const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    genres: ["adventure", "history"],
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    genres: ["fiction"],
+  },
+  {
+    title: "Redder Than Blood",
+    author: "Tanith Lee",
+    genres: ["horror", "mysticism"],
+  },
+];
+
+const genres = books;
+
+// Dopełnij funkcję strzałkową getUserEmails(users) tak, aby zwracała tablicę adresów email użytkowników (właściwość email) z tablicy obiektów w parametrze users.
+
+const getUserEmails = (users) => {};
