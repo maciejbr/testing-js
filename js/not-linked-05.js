@@ -72,6 +72,7 @@ const pointer = makePizza;
 // Funkcja wyższego rzędu (higher order function) to funkcja, która przyjmuje inne funkcje jako parametry lub zwraca funkcję jako wynik.
 // W tym przykładzie jest to funkcja registerGuest, ponieważ oczekuje ona innej funkcji jako parametru i wywołuje ją.
 
+//----
 // Funkcja makeMessage przyjmuje jeden parametr, nazwę pizzy do doręczenia, pizzaName, i zwraca ciąg znaków z wiadomością do klienta.
 
 // Dopełnij funkcję makeMessage w taki sposób, aby oczekiwała jako drugiego parametru (parametr callback) funkcji zwrotnej, a następnie zwracała wynik jej wywołania. Funkcje deliverPizza lub makePizza będą przekazywane jako callback do makeMessage oraz będą oczekiwać jako argumentu nazwy gotowej pizzy, która powinna zostać doręczona.
@@ -120,7 +121,7 @@ function makePizza(pizzaName, callback) {
 }
 
 makePizza("Royal Grand", function deliverPizza(pizzaName) {
-  console.log(`Delivering pizza ${pizzaName}`);
+  return `Delivering pizza ${pizzaName}`;
 });
 
 makePizza("Ultracheese", function eatPizza(pizzaName) {
@@ -262,6 +263,10 @@ const arrowAdd = (a, b, c) => a + b + c;
 
 // Dokonaj refaktoryzacji funkcji calculateTotalPrice(), aby używała niejawnego zwracania.
 
+const calculateTotalPrice = (quantity, pricePerItem) => {
+  return quantity * pricePerItem;
+};
+
 const calculateTotalPrice = (quantity, pricePerItem) => quantity * pricePerItem;
 
 //----
@@ -321,6 +326,34 @@ const calculateTotalPrice = (orderedItems) => {
   return totalPrice;
 };
 
+// Zastąp deklarację funkcji filterArray() i callback dla metody forEach() funkcjami strzałkowymi.
+
+// Przed
+function filterArray(numbers, value) {
+  const filteredNumbers = [];
+
+  numbers.forEach(function (number) {
+    if (number > value) {
+      filteredNumbers.push(number);
+    }
+  });
+
+  return filteredNumbers;
+}
+
+// Po
+const filterArray = (numbers, value) => {
+  const filteredNumbers = [];
+
+  numbers.forEach((number) => {
+    if (number > value) {
+      filteredNumbers.push(number);
+    }
+  });
+
+  return filteredNumbers;
+};
+
 //------------
 
 //------------ Metody map і flatMap -----------
@@ -363,3 +396,41 @@ const doubledNumbers = pureMultiply(numbers, 2);
 console.log(numbers); // [1, 2, 3, 4, 5]
 // Funkcja zwróciła nową tablicę ze zmienionymi danymi
 console.log(doubledNumbers); // [2, 4, 6, 8, 10]
+
+// JavaScript posiada metody tablicowe, które pochodzą z języków funkcjonalnych. Większość iteracyjnych metod tablicowych to czyste funkcje. Tworzą one nową tablicę, wypełniają ją poprzez zastosowanie określonej funkcji zwrotnej do wartości każdego elementu, a następnie zwracają tę nową tablicę.
+
+// Wszystkie iteracyjne metody tablicowe mają podobną składnię. Na oryginalnej tablicy array wywoływana jest metoda iteracyjna method, do której jako argument przekazywana jest funkcja zwrotna callback.
+
+array.method(callback(currentValue, index, array));
+
+// W większości metod, funkcje wywołania zwrotnego otrzymują następujące trzy parametry jako argumenty:
+// Pierwszym parametrem będzie wartość bieżącego elementu tablicy currentValue;
+// Drugim parametrem będzie indeks bieżącego elementu tablicy index;
+// Trzecim parametrem będzie odniesienie do oryginalnej tablicy array.
+
+array.method((item, idx, arr) => {
+  // logika, która będzie wykonywana w każdej iteracji
+});
+
+// Wszystkie parametry z wyjątkiem wartości bieżącego elementu tablicy item są opcjonalne. Nazwy parametrów mogą być dowolne, o ile są jasne dla Ciebie i innych programistów.
+
+array.method((item) => {
+  // logika, która będzie wykonywana w każdej iteracji
+});
+
+//----
+// Funkcja changeEven(numbers, value) przyjmuje tablicę liczb numbers i aktualizuje każdy element, którego wartością jest liczba parzysta, dodając do niego wartość parametru value, który jest dokładnie liczbą.
+
+// Dokonaj refaktoryzacji funkcji, aby została czysta — nie zmieniała tablicy liczb numbers, ale tworzyła, wypełniała i zwracała nową tablicę ze zaktualizowanymi wartościami.
+
+// Przed
+
+function changeEven(numbers, value) {
+  for (let i = 0; i < numbers.length; i += 1) {
+    if (numbers[i] % 2 === 0) {
+      numbers[i] = numbers[i] + value;
+    }
+  }
+}
+
+// Po
