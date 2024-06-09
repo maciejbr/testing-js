@@ -433,4 +433,13 @@ function changeEven(numbers, value) {
   }
 }
 
+function changeEven(numbers, value) {
+  const newNumbers = [];
+  {
+    if (numbers[i] % 2 === 0) {
+      newNumbers.push(numbers + value);
+    }
+  }
+  return newNumbers;
+}
 // Po
