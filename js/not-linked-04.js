@@ -222,66 +222,6 @@ const credentials = {
 
 console.log(credentials); // {email: "henry.carter@aptmail.com", password: "jqueryismyjam"}
 
-//----  Iteracja obiektu -------
-
-// W przeciwieństwie do tablicy lub ciągu znaków, obiekt to nie jest iterowalna jednostka, co oznacza, że nie można go przeglądać za pomocą pętli for lub for...of.
-// Do iteracji po obiektach używa się specjalnej pętli for...in, która przegląda klucze obiektu object.
-
-const book = {
-  title: "Ostatnie Królestwo",
-  author: "Bernard Cornwell",
-  genres: ["proza historyczna", "przygoda"],
-  rating: 8.38,
-};
-
-for (const key in book) {
-  console.log(key); // Klucz (title, author itd.)
-  console.log(book[key]); // Wartość właściwości o takim kluczu ("Ostatnie Królestwo" itd.)
-}
-//---
-// Przejdź przez obiekt apartment używając pętli for...in i zapisz wszystkie jego klucze do tablicy keys, a wszystkie wartości jego właściwości do tablicy values.
-
-const apartment = {
-  descr: "Spacious apartment in the city center",
-  rating: 4,
-  price: 2153,
-};
-
-const keys = [];
-const values = [];
-
-for (const key in apartment) {
-  keys.push(key);
-  values.push(apartment[key]);
-}
-console.log(keys);
-
-// Wbudowana klasa Object posiada kilka użytecznych metod do pracy z obiektami.
-// Pierwszą z nich jest Object.keys(object), która przyjmuje obiekt i zwraca tablicę kluczy jego właściwości. Jeśli obiekt nie posiada właściwości, metoda zwróci pustą tablicę.
-
-const book = {
-  title: "The Last Kingdom",
-  author: "Bernard Cornwell",
-  genres: ["historical prose", "adventure"],
-  rating: 8.38,
-};
-const keys = Object.keys(book);
-console.log(keys); // ['title', 'author', 'genres', 'rating']
-
-// Połączenie wyniku Object.keys() i pętli for...of umożliwia wygodne przeglądanie właściwości obiektu bez użycia pętli for...in.
-
-const book = {
-  author: "Bernard Cornwell",
-  genres: ["proza historyczna", "przygoda"],
-  rating: 8.38,
-};
-const keys = Object.keys(book);
-
-for (const key of keys) {
-  console.log(key); // Klucz
-  console.log(book[key]); // Wartość właściwości
-}
-// Przeglądamy tablicę kluczy obiektu i na każdej iteracji otrzymujemy klucz i wartość właściwości.
 
 //---------  Iteracja obiektu ----------
 // W przeciwieństwie do tablicy lub ciągu znaków, obiekt to nie jest iterowalna jednostka, co oznacza, że nie można go przeglądać za pomocą pętli for lub for...of.
@@ -293,7 +233,7 @@ for (key in object) {
 
 //Zmienna key jest dostępna tylko w ciele pętli.
 // W każdej iteracji zostanie do niej przypisana wartość klucza (nazwa) właściwości.
-Aby uzyskać wartość właściwości o takim kluczu (nazwie), używany jest składnia nawiasów kwadratowych.
+// Aby uzyskać wartość właściwości o takim kluczu (nazwie), używany jest składnia nawiasów kwadratowych.
 
 const book = {
   title: "Ostatnie Królestwo",
@@ -950,7 +890,7 @@ const currentWeekTemps = [23, 17, 18];
 const allTemps = [...lastWeekTemps, ...currentWeekTemps];
 console.log(allTemps); // [14, 25, 11, 23, 17, 18]
 
-// Zmienne firstGroupScores, secondGroupScores i thirdGroupScores przechowują wyniki testów poszczególnych grup. Używając sprayu, uzupełnij kod tak, aby:
+// Zmienne firstGroupScores, secondGroupScores i thirdGroupScores przechowują wyniki testów poszczególnych grup. Używając spreadu, uzupełnij kod tak, aby:
 
 // Zmienna allScores przechowywała tablicę wszystkich wyników od pierwszej do trzeciej grupy włącznie.
 // Zmienna bestScore zawierała najwyższy ogólny wynik.
