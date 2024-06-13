@@ -75,19 +75,15 @@ class Storage {
 // Ver.2
 class Storage {
   #items;
-
   constructor(items) {
     this.#items = items;
   }
-
   getItems() {
     return this.#items;
   }
-
   addItem(newItem) {
     this.#items.push(newItem);
   }
-
   removeItem(itemToRemove) {
     const index = this.#items.indexOf(itemToRemove);
     this.#items.splice(index, 1);
@@ -108,19 +104,15 @@ class StringBuilder {
   constructor(initialValue) {
     this.#value = initialValue;
   }
-
   getValue() {
     return this.#value;
   }
-
   padEnd(str) {
     this.#value = this.#value + str;
   }
-
   padStart(str) {
     this.#value = str + this.#value;
   }
-
   padBoth(str) {
     this.#value = str + this.#value + str;
   }
