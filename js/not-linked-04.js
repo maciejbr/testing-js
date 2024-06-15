@@ -222,7 +222,6 @@ const credentials = {
 
 console.log(credentials); // {email: "henry.carter@aptmail.com", password: "jqueryismyjam"}
 
-
 //---------  Iteracja obiektu ----------
 // W przeciwieństwie do tablicy lub ciągu znaków, obiekt to nie jest iterowalna jednostka, co oznacza, że nie można go przeglądać za pomocą pętli for lub for...of.
 // Do iteracji po obiektach używa się specjalnej pętli for...in, która przegląda klucze obiektu object.
@@ -287,7 +286,6 @@ console.log(keys); // ["title", "author", "genres", "rating"]
 const values = Object.values(book);
 console.log(values); // ["The Last Kingdom", "Bernard Cornwell", 8.38]
 
-
 // Zapisz do zmiennej keys tablicę kluczy właściwości obiektu apartment, a do zmiennej values tablicę ich wartości. Użyj metod Object.keys() i Object.values().
 const apartment = {
   descr: "Spacious apartment in the city center",
@@ -343,7 +341,7 @@ function countTotalSalary(salaries) {
   }
   return totalSalary;
 }
-console.log(countTotalSalary({ kiwi: 200, poly: 50, ajax: 150 })) // 400
+console.log(countTotalSalary({ kiwi: 200, poly: 50, ajax: 150 })); // 400
 
 //-------  Tablica obiektów
 
@@ -411,7 +409,7 @@ function getProductPrice(productName) {
   }
   return null;
 }
-console.log(getProductPrice("Droid")); // 400 
+console.log(getProductPrice("Droid")); // 400
 
 //---- uzyskanie tablicy wszystkich wartości określonej właściwości obiektów:
 const books = [
@@ -436,7 +434,11 @@ console.log(titles); // ["The Last Kingdom", "Beside Still Waters", "The Dream o
 const books = [
   { title: "The Last Kingdom", author: "Bernard Cornwell", rating: 8.2 },
   { title: "Beside Still Waters", author: "Robert Sheckley", rating: 9 },
-  { title: "The Dream of a Ridiculous Man", author: "Fyodor Dostoevsky", , rating: 6.8 }
+  {
+    title: "The Dream of a Ridiculous Man",
+    author: "Fyodor Dostoevsky",
+    rating: 6.8,
+  },
 ];
 
 let totalRating = 0;
@@ -498,9 +500,9 @@ console.log(calculateTotalPrice("Dupa")); // Product Dupa not found!
 // Obiekty mogą przechowywać nie tylko dane, ale również funkcje do pracy z tymi danymi. Jeśli wartość właściwości to funkcja, taka właściwość nazywa się metodą obiektu.
 
 const obj = {
-	method(value) {
-		console.log(`I'm a method with ${value}!`);
-	}
+  method(value) {
+    console.log(`I'm a method with ${value}!`);
+  },
 };
 
 obj.method(5); // "I'm a method with 5!"
@@ -569,7 +571,7 @@ const bookShelf = {
   books: ["The Last Kingdom", "The Mist"],
   getBooks() {
     return this.books;
-  }
+  },
 };
 
 console.log(bookShelf.getBooks()); // ["The Last Kingdom", "The Mist"]
@@ -604,7 +606,7 @@ const bookShelf = {
   },
   addBook(bookName) {
     this.books.push(bookName);
-  }
+  },
 };
 
 console.log(bookShelf.getBooks()); // ["The Last Kingdom"]
@@ -719,8 +721,7 @@ const bookShelf = {
     { title: "The Last Kingdom", rating: 8 },
     { title: "The Mist", rating: 6 },
   ],
-	changeRating(bookName, newRating) {
-	}
+  changeRating(bookName, newRating) {},
 };
 
 // Metoda changeRating oczekuje na nazwę książki, której należy zmienić ocenę, i nową wartość oceny, którą trzeba podstawić w obiekcie. Proces zmiany właściwości obiektu w tablicy rozpoczyna się od takich kroków:
@@ -732,13 +733,13 @@ const bookShelf = {
     { title: "The Last Kingdom", rating: 8 },
     { title: "The Mist", rating: 6 },
   ],
-	changeRating(bookName, newRating) {
-		for(const book of this.books) {
-			if(book.title === bookName) {
-				// Znaleziono potrzebny obiekt po nazwie książki
-			}
-		}
-	}
+  changeRating(bookName, newRating) {
+    for (const book of this.books) {
+      if (book.title === bookName) {
+        // Znaleziono potrzebny obiekt po nazwie książki
+      }
+    }
+  },
 };
 // Wykonując if, możemy być pewni, że na danej iteracji w zmiennej book znajduje się odniesienie do potrzebnego nam obiektu, ponieważ obiekty są przekazywane przez odniesienie. Teraz wystarczy zwrócić się do właściwości tego obiektu i przypisać jej nową wartość.
 
@@ -747,13 +748,13 @@ const bookShelf = {
     { title: "The Last Kingdom", rating: 8 },
     { title: "The Mist", rating: 6 },
   ],
-	changeRating(bookName, newRating) {
-		for(const book of this.books) {
-			if(book.title === bookName) {
-				book.rating = newRating;
-			}
-		}
-	}
+  changeRating(bookName, newRating) {
+    for (const book of this.books) {
+      if (book.title === bookName) {
+        book.rating = newRating;
+      }
+    }
+  },
 };
 
 changeRating("The Mist", 9);
@@ -771,9 +772,9 @@ const atTheOldToad = {
     return this.potions;
   },
   updatePotionName(oldName, newName) {
-    for(const potion of this.potions) {
-      if(potion.name === oldName) {
-        potion.name = newName
+    for (const potion of this.potions) {
+      if (potion.name === oldName) {
+        potion.name = newName;
       }
     }
   },
@@ -784,7 +785,7 @@ const atTheOldToad = {
 // Już umiemy rozwiązywać takie zadania, używając pseudotablicy arguments, w której zbierane są wszystkie przekazane argumenty.
 
 function multiply() {
-	console.log(arguments)
+  console.log(arguments);
 }
 
 multiply(1, 2); // pseudotablica [1, 2]
@@ -828,7 +829,7 @@ function multiply(first, second, ...args) {
 }
 
 multiply(1, 2); // 1 2
-multiply(1, 2, 3); // 1 2 [3] 
+multiply(1, 2, 3); // 1 2 [3]
 multiply(1, 2, 3, 4); // 1 2 [3, 4]
 
 // Funkcja addOverNum() przyjmuje dowolną liczbę argumentów liczbowych.
@@ -839,14 +840,13 @@ function addOverNum(value, ...args) {
   let sum = 0;
   for (const arg of args) {
     if (arg > value) {
-      sum += arg
+      sum += arg;
     }
   }
-  return sum
+  return sum;
 }
 
 console.log(addOverNum(10, 12, 4, 11, 48, 10, 8)); // 71
-
 
 // Czasami potrzebne jest zrobienie odwrotności — przekazać tablicę element po elemencie do funkcji, która jest wywoływana. Na przykład jest wbudowana funkcja Math.max(), która szuka i zwraca największy z argumentów (liczb), tj. oczekuje nie tablicy wartości, ale dowolnej liczby argumentów.
 // Tutaj przyda się operator rozproszenia ...spread.
@@ -872,7 +872,7 @@ function getExtremeScores(scores) {
   return {
     best: Math.max(...scores),
     worst: Math.min(...scores),
-  }
+  };
 }
 
 console.log(getExtremeScores([19, 7, 4, 17, 81, 24])); // { best: 81, worst: 4 }
@@ -900,7 +900,11 @@ const firstGroupScores = [64, 42, 93];
 const secondGroupScores = [89, 14, 51, 26];
 const thirdGroupScores = [29, 47, 18, 97, 81];
 
-const allScores = [... firstGroupScores, ... secondGroupScores, ... thirdGroupScores];
+const allScores = [
+  ...firstGroupScores,
+  ...secondGroupScores,
+  ...thirdGroupScores,
+];
 const bestScore = Math.max(...allScores);
 const worstScore = Math.min(...allScores);
 
@@ -955,5 +959,5 @@ const overrideSettings = {
 
 const finalSettings = {
   ...defaultSettings,
-  ...overrideSettings
+  ...overrideSettings,
 };
