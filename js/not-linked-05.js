@@ -546,6 +546,8 @@ const books = [
 
 const titles = books.map((book) => book.title);
 
+console.log(titles); // ["The Last Kingdom", "Beside Still Waters", "The Dream of a Ridiculous Man", "Redder Than Blood", "Enemy of God"]
+
 //-----
 // Tablica books zawiera kolekcję obiektów książek, z których każdy zawiera właściwość genres, której wartością jest tablica gatunków. Używając metody flatMap(), spraw by zmienna genres zawierała tablicę gatunków wszystkich książek (właściwość genres) z tablicy books.
 
@@ -568,6 +570,8 @@ const books = [
 ];
 
 const genres = books.flatMap((book) => book.genres);
+
+console.log(genres); // ["adventure", "history", "fiction", "horror", "mysticism"]
 
 // Dopełnij funkcję strzałkową getUserEmails(users) tak, aby zwracała tablicę adresów email użytkowników (właściwość email) z tablicy obiektów w parametrze users.
 
