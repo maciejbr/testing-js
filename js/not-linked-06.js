@@ -420,3 +420,310 @@ const a = () => { console.log(this); }; function b() { a(); } b.call({ user: "Ma
 // Czy skrypt jest wykonywany w trybie ścisłym?
 // Jeśli odpowiedź brzmi Tak, wartość this to undefined
 // Jeśli odpowiedź brzmi Nie, wartość this to window
+
+//------ Prototypy -------
+
+// Skąd pochodzą wbudowane metody tablic push, map, reduce i inne?
+// Dlaczego funkcje mają metody call i bind?
+
+// Do tej pory po prostu zakładaliśmy, że one istnieją i można z nich korzystać. Nadszedł czas, aby znaleźć odpowiedzi na te pytania.
+// Wszystko to jest możliwe dzięki mechanizmowi prototypowego dziedziczenia, który umożliwia organizację obiektów w łańcuchy w taki sposób, aby możliwe było automatyczne wyszukiwanie właściwości w innym obiekcie, jeśli nie zostanie ona znaleziona w bieżącym.
+
+// Łącznikiem jest specjalna wewnętrzna właściwość [[Prototype]], której nie zmieniamy jawnie, jest ona używana do automatycznego połączenia obiektów.
+// Metoda Object.create(obj) tworzy i zwraca nowy obiekt, łącząc go z obiektem obj.
+
+const animal = {
+  legs: 4,
+};
+
+const dog = Object.create(animal);
+dog.name = "Mango";
+
+console.log(dog); // { name: "Mango", [[Prototype]]: animal }
+
+// Obiekt, na który wskazuje odniesienie w właściwości [[Prototype]], nazywa się prototypem. W naszym przykładzie obiekt animal jest prototypem dla obiektu dog.
+
+console.log(dog.name); // "Mango"
+console.log(dog.legs); // 4
+
+// Odniesienie dog.name działa w oczywisty sposób: zwraca właściwość name obiektu dog. Kiedy odwołujemy się do dog.legs, interpreter szuka właściwości legs w obiekcie dog, nie znajduje jej i kontynuuje poszukiwania w obiekcie wskazanym przez [[Prototype]], czyli w tym przypadku w obiekcie animal — jego prototypie.
+
+// Zatem prototyp to rezerwowe magazynowanie właściwości i metod obiektu, które jest automatycznie używane podczas ich wyszukiwania.
+
+// Co robi metoda Object.create(obj)? - Tworzy nowy obiekt i ustawia go jako prototyp obj
+
+// Jak nazywa się właściwość, która przechowuje odniesienie do prototypu? - [[Prototype]]
+
+// Jeśli w kodzie potrzebujemy sprawdzić, czy jeden obiekt jest prototypem innego obiektu, używamy metody isPrototypeOf().
+objA.isPrototypeOf(objB)
+// Metoda sprawdza, czy obiekt objA jest prototypem dla obiektu objB
+// Jeśli tak, zwraca true, w przeciwnym razie zwraca false
+
+// Przyjrzyjmy się przykładowi użycia metody isPrototypeOf() do sprawdzania przynależności prototypu.
+const customer = {
+	username: "Jacob"
+};
+
+const animal = { 
+	legs: 4 
+};
+
+const dog = Object.create(animal);
+dog.name = "Mango";
+
+console.log(dog); // { name: "Mango", [[Prototype]]: animal }
+
+console.log(animal.isPrototypeOf(dog)); // true
+console.log(dog.isPrototypeOf(animal)); // false
+console.log(customer.isPrototypeOf(dog)); // false
+
+// w pierwszej linii wyświetlany jest obiekt dog z właściwościami name i [[Prototype]]. [[Prototype]] wskazuje na animal jako prototyp
+// w drugiej — zwracane jest true, ponieważ animal jest prototypem dla dog
+// w trzeciej — zwracane jest false, ponieważ prototyp nie jest dziedziczony w odwrotnym kierunku (od dog do animal)
+// w czwartej linii zwracane jest false, ponieważ customer nie jest prototypem dla dog
+
+//-----
+
+// Zmodyfikuj kod tak, aby obiekt parent stał się prototypem obiektu w zmiennej сhild.
+
+// Przed:
+const parent = {
+  name: "Stacey",
+  surname: "Moore",
+  age: 54,
+  heritage: "Irish",
+};
+
+const child = {};
+child.name = "Jason";
+child.age = 27;
+
+// Po:
+const parent = {
+  name: "Stacey",
+  surname: "Moore",
+  age: 54,
+  heritage: "Irish",
+};
+
+const child = Object.create(parent);
+child.name = "Jason";
+child.age = 27;
+
+// ----
+// Skorzystajmy z już znanego nam przykładu tworzenia obiektu dog z prototypem animal.
+
+const animal = {
+  legs: 4,
+};
+const dog = Object.create(animal);
+dog.name = "Mango";
+
+console.log(dog); // {name: "Mango", [[Prototype]]: animal}
+console.log(dog.name); // "Mango"
+console.log(dog.legs); // 4
+
+// Właściwość name należy do obiektu dog, dlatego nazywana jest własną właściwością (own property) obiektu dog.
+// Właściwość legs nie należy do obiektu dog. Jest to właściwość jego prototypu animal, dlatego nazywana jest niewłasną właściwością (inherited property) obiektu dog.
+
+// Aby sprawdzić, czy w obiekcie znajduje się własna właściwość, używany jest metoda obj.hasOwnProperty(key). Ta metoda sprawdza obecność własnej właściwości o nazwie key i zwraca true, jeśli istnieje, i false w przeciwnym przypadku.
+console.log(dog.hasOwnProperty("name")); // true
+console.log(dog.hasOwnProperty("legs")); // false
+
+//-----
+
+// Operator in, używany w pętli for...in, nie rozróżnia własnych właściwości obiektu i właściwości jego prototypu. Ta cecha może przeszkadzać, ponieważ zazwyczaj potrzebujemy przejrzeć jedynie własne właściwości.
+
+const animal = { legs: 4 };
+const dog = Object.create(animal);
+dog.name = "Mango";
+
+for (const key in dog) {
+  console.log(key); // "name" "legs"
+}
+
+// Aby wybrać wyłącznie własne właściwości podczas iteracji w pętli for...in, należy dodać na każdej iteracji sprawdzenie czy właściwość jest własną za pomocą metody obj.hasOwnProperty(key). Ta metoda zwraca true, jeśli właściwość o nazwie key należy do obiektu obj, a nie do jego prototypu. W przeciwnym razie zwraca false. Rozważmy przykład:
+
+const animal = { legs: 4 };
+const dog = Object.create(animal);
+dog.name = "Mango";
+
+for (const key in dog) {
+	if(dog.hasOwnProperty(key)) {
+		console.log(key); // "name"
+	}
+}
+// Jeśli jest to własna właściwość (own property) — wykonujemy ciało if
+// Jeśli jest to niewłasna właściwość (inherited property) — nic nie robimy
+
+// Metody Object.keys(obj) i Object.values(obj) zwracają tablicę tylko własnych kluczy lub wartości tylko własnych właściwości obiektu obj, bez potrzeby dodatkowych sprawdzeń. Dlatego w praktyce często używa się ich z pętlą for...of zamiast for...in i hasOwnProperty.
+const animal = { legs: 4 };
+const dog = Object.create(animal);
+dog.name = "Mango";
+
+console.log(Object.keys(dog)); // ["name"]
+console.log(Object.values(dog)); // ["Mango"]
+
+for(const key of Object.keys(dog)) {
+	console.log(key); // "name"
+}
+
+// Obiekt, który jest prototypem dla innego obiektu, również może mieć swój prototyp. W ten sposób tworzą się łańcuchy prototypów.
+
+// Zrealizujmy to w kodzie. Łańcuch prototypów buduje się od końca, czyli od prawej do lewej.
+
+const objC = { c: "objC prop" };
+
+const objB = Object.create(objC);
+objB.b = "objB prop";
+
+const objA = Object.create(objB);
+objA.a = "objA prop";
+
+console.log(objA); // { a: "objA prop", [[Prototype]]: objB }
+console.log(objB); // { b: "objB prop", [[Prototype]]: objC }
+console.log(objC); // { c: "objC prop", [[Prototype]]: Object }
+
+// Tworzymy obiekt objC.
+// Następnie tworzymy obiekt objB i ustawiamy objC jako jego prototyp.
+// Potem tworzymy obiekt objA i ustawiamy objB jako jego prototyp.
+
+// Ponieważ obiekty objA, objB i objC są połączone w łańcuch prototypów, obiekt objA może uzyskać dostęp do właściwości objB i objC, a obiekt objB — do właściwości objC.
+
+console.log(objA.hasOwnProperty("a")); // true
+console.log(objA.a); // "objA prop"
+
+console.log(objA.hasOwnProperty("b")); // false
+console.log(objA.b); // "objB prop"
+
+console.log(objA.hasOwnProperty("c")); // false
+console.log(objA.c); // "objC prop"
+
+console.log(objA.hasOwnProperty("x")); // false
+console.log(objA.x); // undefined
+
+// Poszukiwanie właściwości odbywa się do pierwszego dopasowania. Interpreter szuka właściwości po nazwie w obiekcie:
+// Jeśli interpreter nie znajduje własnej właściwości, to odwołuje się do właściwości [[Prototype]], czyli przechodzi do obiektu-prototypu, a następnie — do prototypu prototypu w łańcuchu.
+// Jeśli interpreter dochodzi do końca łańcucha i nie znajduje właściwości o takiej nazwie, to zwraca undefined.
+
+// Przeczytaj przykład kodu Jaką wartość otrzymamy przy odwołaniu condo.rooms?
+const apartment = { rooms: 4, floor: 2, taxFree: false };
+const condo = Object.create(apartment);
+condo.rooms = 3; // 3
+
+// Zmodyfikuj kod, tworząc łańcuch prototypów tak, aby obiekt ancestor był prototypem dla parent, a ten z kolei był prototypem dla child.
+
+// Przed:
+const ancestor = {
+  name: "Paul",
+  age: 83,
+  surname: "Dawson",
+  heritage: "Irish",
+};
+
+const parent = {};
+parent.name = "Stacey";
+parent.surname = "Moore";
+parent.age = 54;
+
+const child = {};
+child.name = "Jason";
+child.age = 27;
+
+
+// Po:
+const ancestor = {
+  name: "Paul",
+  age: 83,
+  surname: "Dawson",
+  heritage: "Irish",
+};
+
+const parent = Object.create(ancestor);
+parent.name = "Stacey";
+parent.surname = "Moore";
+parent.age = 54;
+
+const child = Object.create(parent);
+child.name = "Jason";
+child.age = 27;
+
+//-----
+
+// Stwórzmy łańcuch prototypów z dwóch obiektów.
+
+const objB = {
+	b: "objB prop"
+};
+
+const objA = Object.create(objB);
+objA.a = "objA prop";
+
+console.log(objA);
+
+// Więc objB jest prototypem dla obiektu objA.
+// Na końcu łańcucha prototypów zawsze znajduje się odniesienie do klasy bazowej, od której pochodzi typ danych w łańcuchu. W naszym przypadku objB jest obiektem, więc na końcu łańcucha będzie odniesienie do klasy Object.
+
+//---------- OOP ----------
+
+// Programowanie proceduralne to paradygmat programowania, w którym programy są strukturyzowane jako zestaw funkcji, które wykonują określone działania na danych.
+
+// Procedury (funkcje): Podstawową jednostką programu są funkcje. Są one przeznaczone do wykonywania konkretnych zadań. Funkcje przyjmują argumenty (dane wejściowe), przetwarzają je i mogą zwracać wynik (dane wyjściowe).
+
+// Zmienne lokalne i globalne: Zmienne zadeklarowane w obrębie funkcji są lokalne i dostępne tylko w tej funkcji. Zmienne zadeklarowane poza funkcjami są globalne i dostępne w całym programie.
+
+// Kod proceduralny to zestaw funkcji i zmiennych do przechowywania i przetwarzania informacji, które nie są wyraźnie powiązane.
+// To podejście jest proste i bezpośrednie. Może być używane do zadań, w których nie ma ściśle powiązanych jednostek (danych i funkcji do ich przetwarzania)
+
+const baseSalary = 30000;
+const overtime = 10;
+const rate = 20;
+
+const getWage = (baseSalary, overtime, rate) => {
+  return baseSalary + overtime * rate;
+};
+
+getWage(baseSalary, overtime, rate);
+
+// Programowanie proceduralne to sposób, w jaki dotychczas pisaliśmy kod razem. Jest to proste, zrozumiałe i może być używane do pisania nieskomplikowanych programów. Jednak wraz ze wzrostem złożoności programu podejście proceduralne może stać się nieskuteczne, ponieważ traci się związek między danymi a metodami ich przetwarzania.
+
+//--------
+
+// Programowanie obiektowe (OOP) to paradygmat programowania, w którym programy są strukturyzowane jako zbiór obiektów. Te obiekty reprezentują rzeczywiste lub abstrakcyjne byty: użytkownik, sklep, samochód itp. Każdy z obiektów zawiera dane (właściwości) i metody do interakcji z nimi.
+
+// Przepiszmy kod z poprzedniego przykładu z zastosowaniem OOP.
+// Aby to zrobić, połączymy dane i funkcję ich przetwarzania w obiekt employee.
+
+const employee = {
+  baseSalary: 30000,
+  overtime: 10,
+  rate: 20,
+  getWage() {
+    return this.baseSalary + this.overtime * this.rate;
+  },
+};
+
+employee.getWage();
+
+console.log(employee.getWage()); // 30200
+
+// W takim podejściu nie ma lub prawie nie ma zmiennych globalnych. Metody nie zależą od parametrów, lecz wykorzystują właściwości obiektu, które są ustawiane podczas jego tworzenia i mogą być zmieniane przez inne metody.
+
+// Trzeba zaprojektować klasę.
+// Klasa — to sposób opisu bytu, który określa strukturę i zachowanie obiektów, a także zasady interakcji z tym bytem (kontrakt). Występują one w roli wzorców do tworzenia nowych obiektów.
+
+// W naszym przykładzie klasa definiuje byt: samochód.
+// Właściwościami klasy będą części zamienne: silnik, koła, światła itp.
+// Metodami klasy będą czynności: otworzyć drzwi, uruchomić silnik, zwiększyć prędkość itp.
+
+// Instancje klasy
+// Instancja (obiekt) — to oddzielny przedstawiciel klasy, który posiada dane (właściwości) i metody (funkcje), które działają z tymi danymi. Instancja to to, co zostało stworzone według rysunku, czyli na podstawie opisu z klasy.
+// Innymi słowy, obiekt ma konkretne wartości właściwości i metody, które działają z tymi właściwościami na podstawie reguł określonych w klasie. W przykładzie z samochodami:
+// Klasa — to jakiś abstrakcyjny samochód na rysunku
+// Instancja (obiekt) — to konkretny samochód, który stoi u nas pod oknami
+
+// Interfejs — to zestaw właściwości i metod klasy dostępnych do wykorzystania podczas pracy z instancją.
+
+// W istocie, interfejs opisuje klasę, jasno określając wszystkie możliwe działania (metody), które można na niej wykonać.
+
+// Opisując interfejs klasy, bardzo ważne jest zachowanie równowagi między elastycznością a prostotą.
