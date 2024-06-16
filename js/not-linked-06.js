@@ -727,3 +727,244 @@ console.log(employee.getWage()); // 30200
 // W istocie, interfejs opisuje klasę, jasno określając wszystkie możliwe działania (metody), które można na niej wykonać.
 
 // Opisując interfejs klasy, bardzo ważne jest zachowanie równowagi między elastycznością a prostotą.
+
+
+//---------- Klasy -----------
+
+// Składnia literału obiektu pozwala na stworzenie jednego obiektu. Jednak często istnieje potrzeba stworzenia wielu podobnych obiektów z takim samym zestawem właściwości, ale różnymi wartościami i metodami do interakcji z nimi. Wszystko to musi być robione dynamicznie, podczas wykonywania programu. W tym celu używa się klas.
+
+// Deklaracja klasy ma następującą składnię:
+// słowo kluczowe class
+// nazwa klasy (w przykładzie: User)
+// ciało klasy w nawiasach klamrowych
+
+class User {
+  // Ciało klasy
+}
+
+// Klasy przyjęło się nazywać z wielkiej litery, a w nazwie odzwierciedlać typ tworzonego obiektu (rzeczownika).
+
+// A jak stworzyć z klasy instancję?
+// Po deklaracji klasy można stworzyć jej instancję za pomocą specjalnego operatora new, umieszczając go przed wywołaniem klasy. Wynikiem wywołania new User() będzie instancja klasy User. Będzie ona zawierać dane i mieć zachowanie opisane w klasie.
+
+class User {
+  // Ciało klasy
+}
+
+const mango = new User();
+console.log(mango); // {}
+
+const poly = new User();
+console.log(poly); // {}
+
+
+// Jakiego operatora używa się do stworzenia nowej instancji klasy? - new, np. new Car()
+
+class Car { } // zadeklarowano pustą klasę Car.
+// W wyniku wywołania new Car() zwracany jest pusty obiekt
+
+// Do inicjalizacji instancji klasy używana jest metoda constructor.
+// Jeśli nie zdefiniujemy jej w sposób jawny, zostanie utworzony konstruktor domyślny — pusta funkcja, która nie zmienia instancji klasy.
+
+class User {
+  // Składnia deklaracji metody klasy
+  constructor() {
+		// ...
+  }
+}
+
+// Wywołanie klasy z operatorem new prowadzi do utworzenia nowego obiektu i automatycznego wywołania metody constructor.
+
+class User {
+  constructor() {
+		console.log("constructor call")
+  }
+}
+
+const mango = new User(); // "constructor call"
+console.log(mango); // {}
+
+// Argumenty, które są przekazywane podczas wywołania new User(), stają się wartościami parametrów dla metody constructor.
+
+class User {
+  constructor(name, email) {
+		console.log(name, email);
+  }
+}
+
+const mango = new User("Mango", "mango@mail.com"); // "Mango mango@mail.com"
+console.log(mango); // {}
+
+// Zwróć uwagę, że metoda constructor jest wywoływana w kontekście tworzonej instancji.
+
+class User {
+  constructor(name, email) {
+    // Inicjalizacja właściwości instancji
+    this.name = name;
+    this.email = email;
+  }
+}
+
+const mango = new User("Mango", "mango@mail.com");
+console.log(mango); // { name: 'Mango', email: 'mango@mail.com' }
+
+const poly = new User("Poly", "poly@mail.com");
+console.log(poly); // { name: 'Poly', email: 'poly@mail.com' }
+
+// W ten sposób this wewnątrz konstruktora odnosi się do nowo utworzonego obiektu.
+// To pozwala nadać każdemu obiektowi właściwości z takimi samymi nazwami, ale różnymi wartościami.
+// Właściwości name i email nazywane są publicznymi właściwościami, ponieważ są one własnymi właściwościami (own properties) obiektu-instancji.
+
+// Która metoda klasy jest wywoływana jako pierwsza przy tworzeniu instancji? - constructor
+
+// Co oznacza this wewnątrz konstruktora? - Odniesienie do parametru konstruktora
+
+// Co robi metoda constructor w klasie? - Inicjalizuje własne właściwości instancji klasy
+
+//----
+
+// Dodaj do klasy Car metodę constructor, która przyjmuje trzy parametry: brand, model, price.
+// Klasa Car powinna tworzyć obiekt z właściwościami brand, model i price, których wartości zostaną przekazane jako argumenty przy tworzeniu nowej instancji (przy użyciu operatora new).
+
+class Car {
+  constructor(brand, model, price)  {
+    this.brand = brand;
+    this.model = model;
+    this.price = price;
+  }
+}
+
+const Audi = new Car("Audi", "Q3", "36000");
+const BMW = new Car("BMW", "X5", 58900);
+const Nissan = new Car("Nissan", "Murano", 31700);
+
+console.log(Audi); // Car {brand: "Audi", model: "Q3", price: "36000"}
+
+// Klasa może przyjmować dużą liczbę danych wejściowych dla właściwości przyszłego obiektu.
+// Można również zastosować wzorzec "Obiekt parametrów", przekazując jeden obiekt z logicznie nazwanymi właściwościami, zamiast niepowiązanego zestawu argumentów.
+
+class User {
+  constructor(params) {
+    this.name = params.name;
+    this.email = params.email;
+  }
+}
+
+const mango = new User({
+  name: "Mango",
+  email: "mango@mail.com",
+});
+console.log(mango); // { name: "Mango", email: "mango@mail.com" }
+
+// Ponieważ konstruktor to zwykła funkcja, można zastosować do jego parametru destrukturyzację.
+
+class User {
+ constructor({ name, email }) {
+  this.name = name;
+  this.email = email;
+ }
+}
+
+const mango = new User({
+ name: "Mango",
+ email: "mango@mail.com",
+});
+console.log(mango); // { name: "Mango", email: "mango@mail.com" }
+
+
+// Przeprowadź refaktoryzację klasy Car tak, aby przyjmowała ona jeden parametr, tj. obiekt z właściwościami brand, model i price.
+
+// Przed:
+
+class Car {
+  constructor(brand, model, price) {
+    this.brand = brand;
+    this.model = model;
+    this.price = price;
+  }
+}
+
+// Po:
+
+class Car {
+  constructor(params) {
+    this.brand = params.brand;
+    this.model = params.model;
+    this.price = params.price;
+  }
+}
+
+// Do pracy z właściwościami przyszłej instancji używane są metody klasy.
+
+// Metody klasy to funkcje, które będą dostępne instancji w jej prototypie. Są one deklarowane w dowolnej kolejności po konstruktorze. W przeciwieństwie do składni metod obiektu (są oddzielone przecinkiem), metody klasy nie są oddzielone żadnymi specjalnymi znakami.
+
+// Rozważmy przykład użycia metod w klasie User.
+
+class User {
+  constructor({ name, email }) {
+    this.name = name;
+    this.email = email;
+  }
+
+  // Metoda getEmail
+  getEmail() {
+		// ...
+  }
+
+  // Metoda changeEmail
+  changeEmail(newEmail) {
+		// ...
+  }
+}
+
+// Do dostępu do właściwości w metodach używa się słowa kluczowego this, ponieważ metody będą wywoływane w kontekście obiektu-instancji.
+
+class User {
+  constructor({ name, email }) {
+    this.name = name;
+    this.email = email;
+  }
+
+  getEmail() {
+    return this.email;
+  }
+
+  changeEmail(newEmail) {
+    this.email = newEmail;
+  }
+}
+
+// Po utworzeniu instancji można używać zadeklarowanych metod klasy, które będą odwoływały się do właściwości obiektu, który je wywołał.
+
+const mango = new User({ 
+	name: "Mango", 
+	email: "mango@mail.com" 
+});
+
+console.log(mango.getEmail()); // "mango@mail.com"
+
+mango.changeEmail("new@mail.com");
+
+console.log(mango.getEmail()); // "new@mail.com"
+
+// Jak poprawnie odwołać się do właściwości username klasy Customer w jej metodzie? - this.username
+
+// Dodaj do klasy Car dwie metody.
+// getPrice() zwraca wartość właściwości price w obiekcie, w którym metoda zostanie wywołana.
+// changePrice(newPrice) zmieni wartość właściwości price na wartość parametru newPrice w obiekcie, w którym metoda zostanie wywołana.
+
+class Car {
+  constructor(params) {
+    this.brand = params.brand;
+    this.model = params.model;
+    this.price = params.price;
+  }
+
+getPrice() {
+  return this.price;
+}
+
+changePrice(newPrice) {
+  this.price = newPrice;
+}
+}
