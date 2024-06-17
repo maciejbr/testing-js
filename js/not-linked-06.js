@@ -937,7 +937,7 @@ class User {
 // Po utworzeniu instancji można używać zadeklarowanych metod klasy, które będą odwoływały się do właściwości obiektu, który je wywołał.
 
 const mango = new User({ 
-	name: "Mango", 
+	name: "Mango",
 	email: "mango@mail.com" 
 });
 
