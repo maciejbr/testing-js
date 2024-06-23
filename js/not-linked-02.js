@@ -358,6 +358,7 @@ const lastName = fullName.slice(6);
 console.log(fullName); // "Jacob Mercer"
 console.log(firstName); // "Jacob"
 console.log(lastName); // "Mercer"
+
 //---
 function getSubstring(string, length) {
   return string.slice(0, length);
