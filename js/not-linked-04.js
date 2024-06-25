@@ -8,6 +8,7 @@ const book = {
   public: true,
   rating: 8.38,
 };
+
 //----
 const user = {
   name: "Jacques Gluke",
