@@ -55,18 +55,22 @@ console.log(5 !== 5); // false
 console.log(1 === true); // false
 console.log(1 !== true); // true
 
-// W przeciwieństwie do operatorów nieścisłych, wyrażenia 5 == "5" i 1 == true zwrócą false, ponieważ operandy są różnych typów.
+// W przeciwieństwie do operatorów nieścisłych, wyrażenia 5 === "5" i 1 === true zwrócą false, ponieważ operandy są różnych typów.
 
 const correctPassword = "jqueryismyjam";
 const userPassword = "mangodab3st";
 const isValid = correctPassword === userPassword;
 console.log(isValid); //false
 
+// Jawna konwersja typów operandów:
+
 console.log(Number("5")); // 5
 console.log(Number(true)); // 1
 console.log(Number(false)); // 0
 console.log(Number(null)); // 0
 console.log(Number(undefined)); // NaN
+
+// Niejawna konwersja:
 
 console.log("5" * 2); // 10
 console.log("10" - 5); // 5
