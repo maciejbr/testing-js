@@ -1,5 +1,7 @@
 "use strict";
+
 //----------------- Rozgałęzienia
+
 let price = 0;
 const subscription = "pro";
 
