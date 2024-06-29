@@ -64,6 +64,7 @@ function getExtremeElements(array) {
   return newArray;
 }
 console.log(getExtremeElements([1, 2, 3, 4, 5])); // [1, 5]
+console.log(getExtremeElements(["Earth", "Mars", "Venus"])); // ["Earth", "Venus"]
 //--------
 
 // przez odniesienie (by reference)
