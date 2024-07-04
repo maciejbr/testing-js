@@ -384,7 +384,7 @@ showThis.call({ username: "Mango" }); // this in showThis: window
 showThis.apply({ username: "Mango" }); // this in showThis: window
 
 const boundShowThis = showThis.bind({ username: "Mango" }); 
-boundShowThis(); // this in showThis: window
+boundShowThis() // this in showThis: window
 
 // Ograniczając funkcje strzałkowe do stałego kontekstu, silniki JavaScript mogą je lepiej zoptymalizować, w przeciwieństwie do zwykłych funkcji, których wartość this może być zmieniona.
 
