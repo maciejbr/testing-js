@@ -29,6 +29,8 @@ console.log(message); // Username Dominika is 8 characters long.
 // składnia szablonów łańcuchowych (string templates)
 
 const product = "Repair droid";
+console.log(product.length); // 12
+console.log(product.length - 1); // 11
 console.log(product[product.length - 1]); // 'd'
 
 let age = 18;
