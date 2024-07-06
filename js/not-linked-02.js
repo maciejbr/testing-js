@@ -475,7 +475,10 @@ function createFileName(name, ext) {
 }
 console.log(createFileName("report ", "csv")); // report.csv
 
-//----- PĘTLE -----//
+//---
+
+//---------- PĘTLE ----------//
+
 //--- while - może nie wykonać się ani razu
 let count = 0;
 
@@ -505,6 +508,7 @@ function calculateTotal(number) {
 console.log(calculateTotal(3)); // 6
 console.log(calculateTotal(24)); // 300
 //------
+
 // do ... while - wykonuje się co najmniej raz
 let count = 0;
 
