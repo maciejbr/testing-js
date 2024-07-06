@@ -31,8 +31,10 @@ console.log(message); // Username Dominika is 8 characters long.
 const product = "Repair droid";
 console.log(product.length); // 12
 console.log(product.length - 1); // 11
+console.log(product[3]); // 'a'
 console.log(product[product.length - 1]); // 'd'
 
+//
 let age = 18;
 const isAdult = age >= 18;
 console.log(isAdult); //true
