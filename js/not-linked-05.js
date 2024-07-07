@@ -540,8 +540,16 @@ const books = [
     author: "Fyodor Dostoevsky",
     rating: 7.75,
   },
-  { title: "Redder Than Blood", author: "Tanith Lee", rating: 7.94 },
-  { title: "Enemy of God", author: "Bernard Cornwell", rating: 8.67 },
+  {
+    title: "Redder Than Blood",
+    author: "Tanith Lee",
+    rating: 7.94,
+  },
+  {
+    title: "Enemy of God",
+    author: "Bernard Cornwell",
+    rating: 8.67,
+  },
 ];
 
 const titles = books.map((book) => book.title);
