@@ -849,7 +849,6 @@ class User {
     this.email = params.email;
   }
 }
-
 const mango = new User({
   name: "Mango",
   email: "mango@mail.com",
