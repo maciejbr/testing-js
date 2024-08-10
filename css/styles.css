@@ -1,0 +1,96 @@
+/* Selektor typu elementu */
+
+#hero {
+  color: #3f51b5;
+}
+
+/* Selektor klasy */
+
+.title {
+  color: skyblue;
+}
+
+/* Selektor potomka */
+/* Stosuje się do wszystkich linków w dokumencie */
+a {
+  color: tomato;
+}
+
+/* Stosuje się do linków znajdujących się wewnątrz list nieuporządkowanych */
+ul a {
+  color: tomato;
+}
+
+/* Stosuje się tylko do linków wewnątrz znacznika z klasą social-links */
+.social-links a {
+  color: tomato;
+}
+
+/* Selektor dziecka */
+
+/* ✅ To, czego potrzebujesz */
+.menu > li {
+  border: 1px solid tomato;
+}
+
+/* Selektory stanu (pseudoklasy) */
+
+/* ✅ */
+selektor:pseudoklasa {
+  /* Właściwości */
+}
+
+/* ❌ */
+selektor :pseudoklasa {
+  /* Właściwości */
+}
+
+/* Pseudoklasa :hover jest aktywowana, gdy kursor myszy znajduje się w obrębie elementu, na przykład po najechaniu na link lub inny element. */
+
+.link {
+  color: teal;
+}
+
+.link:hover {
+  color: tomato;
+}
+
+/* inny przykład */
+
+.social-links .link {
+  color: teal;
+}
+
+.social-links .link:hover {
+  color: tomato;
+}
+
+/* Pseudoklasa :active występuje, gdy element jest aktywny — link staje się aktywny, gdy najedziesz na niego kursorem i klikniesz myszą. */
+
+/* Ważne jest, aby zrozumieć, że pseudoklasy :hover i :active są różnymi stanami. Stan :hover jest inicjowany, gdy użytkownik najedzie myszką na element i jest zwykle reprezentowany przez zmianę background-color (lub color). Różnica w stylu między stanem :hover i jego brakiem nie musi być wyraźna, ponieważ użytkownik już wie, że najechał na coś myszką. */
+
+.social-links .link {
+  color: teal;
+}
+
+.social-links .link:hover {
+  color: orange;
+}
+
+.social-links .link:active {
+  color: red;
+}
+
+/* Pseudoklasa :focus jest aktywowana, gdy element interaktywny (link, przycisk, pole formularza) uzyskuje fokus po kliknięciu go myszą lub nawigacji po stronie za pomocą klawiatury (klawisz Tab).
+
+Aby uwzględnić najechanie kursorem i fokus, musisz stylizować oba stany jednocześnie. Możesz to zrobić po prostu wymieniając selektory. */
+
+.social-links .link {
+  color: teal;
+}
+
+/* Dwa lub więcej selektorów dla tej samej reguły są oddzielane przecinkiem */
+.social-links .link:hover,
+.social-links .link:focus {
+  color: orange;
+}
