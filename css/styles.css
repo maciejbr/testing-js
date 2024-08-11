@@ -94,3 +94,146 @@ Aby uwzględnić najechanie kursorem i fokus, musisz stylizować oba stany jedno
 .social-links .link:focus {
   color: orange;
 }
+
+/* specyficzność - 0 0 0 1 */
+a {
+  color: green;
+}
+
+/* specyficzność - 0 0 1 0 */
+.post-link {
+  color: orange;
+}
+
+/* specyficzność - 0 0 1 1 */
+a.post-link {
+  color: blue;
+}
+
+/* specyficzność - 0 0 2 0 */
+.post > .post-link {
+  color: red;
+}
+
+/* ✅ specyficzność - 0 0 2 1 */
+.post > a.post-link {
+  color: brown;
+}
+
+/* */
+
+/* specyficzność - 0 0 1 0 */
+.post-title {
+  color: green;
+}
+
+/* ✅ specyficzność - 0 1 0 0 */
+#title {
+  color: orange;
+}
+
+/* awaryjne */
+
+p {
+  color: orange !important;
+}
+
+p#text-id.text {
+  color: blue;
+}
+
+/* Przypisywanie klas tylko do wspólnego bloku */
+
+.post {
+  /* Style artykułu */
+}
+
+.post > h1 {
+  /* Style nagłówka */
+}
+
+.post > p {
+  /* Style tekstu */
+}
+
+.post > a {
+  /* Style linków */
+}
+
+.post > a:hover {
+  /* Style linków przy najechaniu */
+}
+
+/* Klasy opisowe dla bloku nadrzędnego i znaczników wewnątrz niego */
+
+.post {
+  /* Style artykułu */
+}
+
+.post > .title {
+  /* Style nagłówka */
+}
+
+.post > .text {
+  /* Style tekstu */
+}
+
+.post > .link {
+  /* Style linków */
+}
+
+.post > .link:hover {
+  /* Style linków przy najechaniu */
+}
+
+/* Specyficzne klasy dla każdego znacznika */
+
+.post {
+  /* Style artykułu */
+}
+
+.post-title {
+  /* Style nagłówka */
+}
+
+.post-text {
+  /* Style tekstu */
+}
+
+.post-link {
+  /* Style tekstu przy najechaniu*/
+}
+
+.post-link:hover {
+  /* Style linków przy najechaniu */
+}
+
+/* Jeśli chcesz, aby link w Twoim poście miał ten sam kolor co reszta tekstu, możesz użyć specjalnej wartości inherit dla właściwości color, aby uniknąć powielania koloru w dwóch miejscach. */
+
+.post {
+  color: green;
+}
+
+.post-link {
+  color: inherit;
+}
+
+/* currentcolor - by się nie powtarzać */
+
+<a href="" class="link" > Lorem ipsum dolor sit amet</a > .link {
+  color: orangered;
+  border: 1px solid currentcolor;
+}
+
+/* Czcionki */
+
+body {
+  font-family: "Helvetica Neue", "Roboto", "Verdana", sans-serif;
+}
+
+.page-title {
+  font-family: "Georgia", serif;
+  font-size: 24px;
+  font-weight: 500;
+  font-style: italic;
+}
