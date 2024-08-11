@@ -237,3 +237,462 @@ body {
   font-weight: 500;
   font-style: italic;
 }
+
+/* text-shadow */
+
+.title {
+  color: orangered;
+  text-shadow: 2px 2px 4px black;
+}
+
+/* Znacznik <span class="accent">span</span> to uniwersalny kontener dla małych treści tekstowych. */
+
+/* Globalne style */
+
+body {
+  font-family: "Helvetica Neue", "Roboto", "Verdana", sans-serif;
+  color: #2a2a2a;
+  background-color: #fafafa;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Tahoma";
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+/* Model blokowy elementu */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reszta kodu */
+
+/* Jednakowe marginesy 20px ze wszystkich stron */
+padding: 20px;
+
+/* Górny i dolny margines 10px, lewy i prawy margines 20px */
+padding: 10px 20px;
+
+/* Górny margines 10px, lewy i prawy margines 20px, dolny margines 5px */
+padding: 10px 20px 5px;
+
+/* Górny margines 10px, prawy margines 15px, dolny margines 20px, lewy margines 25px */
+padding: 10px 15px 20px 25px;
+
+/* Do ustawienia marginesu wewnętrznego tylko dla jednej lub dwóch stron, używa się właściwości padding dla każdej strony osobno. Dla stron, które nie zostały wyraźnie określone, używane są domyślne wartości z arkusza stylów przeglądarki, a jeśli ich nie ma, przyjmowana jest wartość 0. */
+
+padding-top: 20px;
+padding-right: 10px;
+padding-bottom: 15px;
+padding-left: 30px;
+
+margin-top: 20px;
+margin-right: 10px;
+margin-bottom: 15px;
+margin-left: 30px;
+
+/* GLOBALNY RESET STYLÓW */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+ul,
+ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+list-style-type: none;
+
+/* najlepiej normalizator stylów */
+
+.box {
+  width: 200px;
+  height: 200px;
+  border: 5px solid orangered;
+}
+
+border-width: wartość;
+border-style: wartość;
+border-color: wartość;
+
+/* by zmienać tylko jeden parametr */
+
+.box {
+  width: 200px;
+  height: 200px;
+  border: 5px solid orangered;
+}
+
+.box:hover {
+  border-color: cyan;
+}
+
+.box {
+  width: 200px;
+  height: 200px;
+
+  border-top: 3px solid blue;
+  border-right: 5px dotted black;
+  border-bottom: 7px dashed palevioletred;
+  border-left: 9px double green;
+}
+
+/* zaokrąglenia */
+.box {
+  border-radius: 50%; /* okrąg */
+}
+
+/* lewy górny róg */
+border-top-left-radius: 10px;
+
+/* prawy górny róg */
+border-top-right-radius: 20%;
+
+/* prawy dolny róg */
+border-bottom-right-radius: wartość;
+
+/* lewy dolny róg */
+border-bottom-left-radius: wartość;
+
+/* by obraz nie wychodził poza obramowanie */
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.thumb {
+  border: 10px solid green;
+  border-radius: 50px;
+  width: 480px;
+
+  overflow: hidden; /* !!! */
+}
+
+overflow: visible | hidden | scroll | auto;
+
+Istnieją również właściwości overflow-x і overflow-y,
+które kontrolują przepełnienie tylko w odpowiedniej płaszczyźnie. .container {
+  width: 480px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* elementy liniowe */
+
+/* display: inline => można ustawić tylko geometrię poziomą */
+
+.link {
+  background-color: tomato;
+  color: white;
+
+  /* ✅ Działa */
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-right: 50px;
+  margin-left: 50px;
+
+  /* ❌ Żadnego efektu */
+  width: 1000px;
+  height: 1000px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+/* hybryda display: inline-block */
+
+<a href="" class="link" > Dowiedz się więcej</a > .link {
+  display: inline-block;
+  padding: 16px 32px;
+
+  border-radius: 3px;
+  background-color: teal;
+  color: white;
+
+  font-family: sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Ustawianie obrazów by były blokowe (nie bedzie gap między nimi) */
+
+img {
+  display: block;
+}
+
+/* */
+
+.card-image {
+  max-width: 100%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* dopasowuje obraz do kontenera */
+
+.thumb {
+  height: 400px;
+  width: 300px;
+}
+
+.thumb img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* FLEXBOX */
+
+display: flex | inline-flex;
+
+.menu {
+  display: flex;
+  gap: 8px;
+}
+
+flex-direction: row | row-reverse | column | column-reverse;
+
+justify-content: flex-start | flex-end | center | space-between | space-around |
+  space-evenly;
+
+/* kontroluje rozmieszczenie wzdłuz cross-axis */
+align-items: stretch | flex-start | flex-end | center | baseline;
+
+/* Przydatne do header, na logo i kontakt */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* by układał w kolejncyh liniacj */
+
+flex-wrap: nowrap | wrap | wrap-reverse;
+
+/* Tworzenie siatki elementów */
+
+.card-set {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.item {
+  width: calc((100% - 20px) / 3);
+}
+
+align-content: flex-start | flex-end | center | space-between | space-around |
+  space-evenly | stretch;
+
+/* Elementy elastyczne
+
+Elementy elastyczne są dziećmi kontenera elastycznego,
+czyli elementami pierwszego poziomu zagnieżdżenia. */
+
+flex-basis: auto | wartość;
+
+flex-grow: udział;
+
+/* Robimy SIDE-BAR */
+
+<div
+  class="container"
+  > <aside
+  class="sidebar"
+  > Sidebar</aside
+  > <main
+  class="content"
+  > Main
+  content</main
+  > </div
+  > * {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.5;
+  font-size: 20px;
+  background-color: #edf2f7;
+}
+
+.container {
+  display: flex;
+  gap: 8px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.sidebar {
+  flex-basis: 200px;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.sidebar,
+.content {
+  height: 300px;
+  padding: 20px;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+/* Przyklejony footer */
+
+<div class="page-container"> /*owrapujemy */
+	<header>Page header</header>
+	<main>Main content</main>
+	<footer>Page footer</footer>
+</div>
+
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+}
+
+/* by nie kompresowało ikony */
+
+.icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+}
+
+/* dla pojedynczego elementu zamiast align-items */
+
+.card img {
+   align-self: flex-start;
+}
+
+/* Pseudoklasy strukturalne */
+
+<ul
+  class="list"
+  > <li
+  class="list-item"
+  > HTML</li
+  > <li
+  class="list-item"
+  > CSS</li
+  > <li
+  class="list-item"
+  > JavaScript</li
+  > <li
+  class="list-item"
+  > React</li
+  > </ul
+  > .list-item {
+  color: blue;
+}
+
+.list-item:first-child {
+  color: red;
+}
+
+.list-item:last-child {
+  color: green;
+}
+
+/* usuwanie ostatniego marginesu */
+
+.list-item {
+  margin-bottom: 12px;
+}
+
+.list-item:last-child {
+  margin-bottom: 0;
+}
+
+/* odwrotnie to samo */
+
+.list-item:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+/* nth child */
+
+# Przy n = 0
+2 * 0 + 1 = 1
+
+# Przy n = 1
+2 * 1 + 1 = 3
+
+# Przy n = 2
+2 * 2 + 1 = 5
+
+# I tak dalej dla n = 3, n = 4 ...
+
+/* co drugi wiersz */
+
+<ul class="list">
+  <li class="list-item">1</li>
+  <li class="list-item">2</li>
+  <li class="list-item">3</li>
+  <li class="list-item">4</li>
+  <li class="list-item">5</li>
+  <li class="list-item">6</li>
+  <li class="list-item">7</li>
+  <li class="list-item">8</li>
+  <li class="list-item">9</li>
+  <li class="list-item">10</li>
+</ul>
+
+/* parzyste */
+.list-item:nth-child(2n) {
+  background-color: orange;
+}
+
+/* Analogicznie, używając aliasu */
+.list-item:nth-child(even) {
+  background-color: orange;
+}
+
+/* nieparzyste */
+.list-item:nth-child(2n + 1) {
+   background-color: orange;
+}
+
+/* Analogicznie, używając aliasu */
+.list-item:nth-child(odd) {
+   background-color: orange;
+}
