@@ -1198,3 +1198,142 @@ fieldset {
  margin: 0;
  border: none;
 }
+
+/* Zapytania media */
+
+body {
+ background-color: white;
+}
+
+
+/* Ma zastosowanie, jesli szerokość viewport jest poniżej 600px */
+@media (max-width: 600px) {
+ body {
+ background-color: green;
+ }
+}
+
+
+/* Ma zastosowanie, jesli szerokość viewport jest powyżej 800px */
+@media (min-width: 800px) {
+ body {
+ background-color: orange;
+ }
+}
+
+/* Przykład nadpisywania */
+
+/* Style bazowe */
+body {
+ color: #2a2a2a;
+ background-color: #fff;
+ font-size: 16px;
+ line-height: 1.5;
+ font-family: sans-serif;
+}
+
+
+/* Od 600px i więcej zmieniamy kolor tła, rozmiar i kolor tekstu */
+@media (min-width: 600px) {
+ body {
+ background-color: #2196f3;
+ font-size: 20px;
+ color: #fff;
+ }
+}
+
+
+/* Od 900px i więcej zmieniamy kolor tła. */
+@media (min-width: 900px) {
+ body {
+ background-color: #4caf50;
+ }
+}
+
+/* Media types */
+
+@media print {
+ body {
+  color: green;
+ }
+}
+
+@media screen and (min-width: 400px) { /* ... */ }
+
+/* do wszystkich */
+
+@media (min-width: 400px) { /* ... */ }
+
+/* Adaptive grid */
+
+<div class="container">
+  <div class="element">1</div>
+  <div class="element">2</div>
+  <div class="element">3</div>
+  <div class="element">4</div>
+  <div class="element">5</div>
+  <div class="element">6</div>
+</div>
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 1170px;
+  min-width: 320px;
+  maring: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .element {
+    flex-basis: calc((100% - 10px) / 2);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    gap: 15px;
+  }
+
+  .element {
+    flex-basis: calc((100% - 30px) / 3);
+  }
+}
+
+/* Obrazy elastyczne */
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Obrazy responsywne */
+
+<img
+  srcset="./img/photo.jpg 1x, ./img/photo@2x.jpg 2x"
+  src="./img/photo.jpg"
+  alt="Opis obrazów dla wszystkich wersji"
+/>
+
+/* Obrazy tła */
+
+/* Style bazowe і 1x grafika */
+.box {
+  width: 200px;
+  height: 300px;
+  background-image: url('photo.png');
+  background-size: 200px 300px;
+}
+
+/* Określamy nową ścieżkę do obrazu jeśli zagęszczenie obrazu wynosi minimum 2x */
+@media (min-resolution: 192dpi) {
+  .box {
+    background-image: url('photo@2x.png');
+  }
+}
