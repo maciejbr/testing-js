@@ -986,3 +986,215 @@ animation-fill-mode: none | forwards | backwards | both
 .box {
   transform: skew(30deg);
 }
+
+/* Formularze */
+
+<form name="feedback_form" autocomplete="off" novalidate> 
+<!-- Elementy formularza --> </form>
+
+
+<form> <!-- Elementy formularza --> <button type="submit">Submit feedback</button> </form>
+
+button { font-family: inherit; color: currentColor; }
+
+/* Input */
+
+ <form> <input type="text" name="username" /> <button type="submit">Submit feedback</button> </form>
+
+ input { font-family: inherit; }
+
+ /* Label ! */
+
+/* Element label jest etykietą, która opisuje, jakie informacje powinny być wprowadzone w polu wprowadzania. Atrybut label tworzy kategorie odpowiedzi w rozwijanym polu wyboru. */
+
+ <form> 
+<label> Username <input type="text" name="username" /> 
+</label> <button type="submit">Submit feedback</button> 
+</form>
+
+<form> 
+<label for="username">Username</label> 
+<input type="text" name="username" id="username" />
+ <button type="submit">Submit feedback</button> 
+</form>
+
+/* + Placeholder */
+
+<form> 
+   <label> 
+Username <input type="text" name="username" placeholder="Jacob Mercer" /> 
+</label> 
+<button type="submit">Submit feedback</button> 
+</form>
+
+/* Pseudoelement ::placeholderjest wykorzystywany do dostosowywania wyglądu tekstu w podpowiedziach. */
+
+input::placeholder { 
+color: teal; 
+font-weight: 700; }
+
+input:hover::placeholder, 
+input:focus::placeholder { 
+color:orange; 
+}
+
+input { border: 1px solid orange; } 
+input:placeholder-shown 
+{ border-color: blue; }
+
+/* Autofocus */
+
+<input type="text" name="username" autofocus />
+
+form:focus-within { 
+border-color: blue; 
+}
+
+/* Textarea */
+
+<textarea name="" rows="" cols="" placeholder=""></textarea>
+
+resize: both | horizontal | vertical | none
+
+/* Select */
+
+<select name="size"> 
+<option value="xs">Extra Small</option> 
+<option value="s">Small</option> 
+<option value="m" 
+selected>Medium</option> 
+<option value="l">Large</option> 
+</select>
+
+/* Grupowanie */
+
+<select name="month">
+  <optgroup label="Summer">
+    <option value="s6">June</option>
+    <option value="s7">July</option>
+    <option value="s8">August</option>
+  </optgroup>
+
+
+  <optgroup label="Autumn">
+    <option value="s9">September</option>
+    <option value="s10">October</option>
+    <option value="s11">November</option>
+  </optgroup>
+</select>
+
+/* Input tupe */
+
+<form>
+	<label>
+	  Email
+	  <input type="email" name="email" />
+	</label>
+	<label>
+	  Password
+	  <input type="password" name="pwd" minlength="5" maxlength="12" />
+	</label>
+  <label>
+    Phone number
+    <input type="tel" name="phone" />
+  </label>
+  <button type="submit">Register</button>
+</form>
+
+/* Kontrola nad wartościami */
+
+<input type="number" name="age" value="0" min="18" max="120" />
+
+/* Aby wybrać tylko datę */
+<input type="date" />
+/* Aby wybrać tylko czas */
+<input type="time" />
+/* Aby wybrać oba */
+<input type="datetime-local" />
+
+/* Radio buttons */
+
+<form>
+  <p>Choose a color:</p>
+  <label>
+    <input type="radio" name="color" value="red" checked />
+    Red
+  </label>
+  <label>
+    <input type="radio" name="color" value="white" />
+    White
+  </label>
+  <label>
+    <input type="radio" name="color" value="green" />
+    Green
+  </label>
+</form>
+
+/* Checkbox */
+
+<form>
+  <p>What are your hobbies?</p>
+  <label>
+    <input type="checkbox" name="hobby" value="music" checked />
+    Music
+  </label>
+  <label>
+    <input type="checkbox" name="hobby" value="sports" checked />
+    Sports
+  </label>
+  <label>
+    <input type="checkbox" name="hobby" value="reading" />
+    Reading
+  </label>
+</form>
+
+input:checked {
+	box-shadow: 0 0 0 2px orangered;
+}
+
+input[type="checkbox"]:checked { box-shadow: 0 0 0 2px orangered; }
+
+ul + p { background-color: yellow; } /* p tylko po ul */
+
+/* Zmienia tez kolor treści */
+
+<input type="checkbox" name="hobby" value="music" id="music" /> <label for="music">Music</label>
+
+input[type="checkbox"]:checked + label { color: blue; }
+
+/* Wymagane */
+<input type="email" name="email" required />
+
+/* Nieaktywny */
+
+<button type="button">Active button</button> 
+<button type="button" disabled>Disabled button</button>
+
+button:disabled {
+  background-color: lightgray;
+  cursor: not-allowed;
+}
+
+/* Grupowanie formularzy */
+
+<form>
+  <fieldset>
+    <legend>Nagłówek grupy</legend>
+    <!-- Grupa interaktywnych elementów -->
+  </fieldset>
+
+
+  <fieldset>
+    <legend>Nagłówek grupy</legend>
+    !-- Grupa interaktywnych elementów -->
+  </fieldset>
+
+
+  <button type="submit">Submit</button>
+</form>
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
