@@ -825,3 +825,164 @@ transition-delay: <opóźnienie>
   transition-timing-function: linear; /* ease, ease-in/out/in-out */
   transition-delay: 0;
 }
+
+/* Animacja CSS */
+
+@keyframes changeBgColor {
+  0% {
+    background-color: teal;
+  }
+
+  50% {
+    background-color: orange;
+  }
+
+  100% {
+    background-color: deepskyblue;
+  }
+}
+
+.box {
+  animation-name: changeBgColor;
+}
+
+/* lub */
+
+. box {
+ /* Podstawowe style elementów */
+}
+
+/* Dodajemy animację po najechaniu */
+.box:hover {
+ animation-name: changeBgColor;
+}
+
+
+@keyframes changeHeaderColor {
+  0% {
+    background-color: #d32f2f;
+  }
+
+  33% {
+    background-color: #388e3c;
+  }
+
+  66% {
+    background-color: #1976d2;
+  }
+
+    100% {
+    background-color: #d32f2f;
+  }
+}
+
+.box:hover {
+  animation-name: changeBgColor;
+  animation-duration: 3000ms;
+  animation-timing-function: linear;
+    animation-iteration-count: 5; (licza powtórzeń animacji)
+      animation-delay: 1s;
+        animation-direction: alternate;
+}
+
+/* Pause animation on hover */
+.box:hover {
+  animation-play-state: paused;
+}
+
+animation-fill-mode: none | forwards | backwards | both
+
+/* Transform 2D */
+
+.box::before {
+  display: inline-block;
+  font-size: 20px;
+}
+
+.box:nth-child(1) {
+  /*   transform: scale(1.25); */
+  background-color: orange;
+
+  animation: animate125 3000ms infinite 1000ms;
+}
+
+.box:nth-child(1)::before {
+  content: "scale(1.25)";
+}
+
+
+/* rotate */
+
+.box {
+  transform: rotate(45deg);
+}
+
+/* translate */
+
+.box {
+  transform: translate(100px, 200px);
+}
+
+/* !!! ukryta wiadomość */
+
+<div class="box">
+  <div class="overlay"></div>
+</div>
+
+.box {
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  transform: translateY(100%);
+}
+
+.box:hover .overlay {
+  transform: translateY(0);
+}
+
+.box {
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  transform: translateY(100%);
+  transition: transform 250ms ease-in-out;
+}
+
+
+/* umieszczenie bezwzględnie pozycjonowanego elementu dokładnie w środku bloku, względem którego jest on pozycjonowany */
+
+<div class="parent">
+  <div class="box"></div>
+</div>
+
+.parent {
+	position: relative;
+}
+
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* skręt */
+
+.box {
+  transform: skew(30deg);
+}
