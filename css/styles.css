@@ -1178,19 +1178,19 @@ button:disabled {
 /* Grupowanie formularzy */
 
 <form>
-  <fieldset>
-    <legend>Nagłówek grupy</legend>
-    <!-- Grupa interaktywnych elementów -->
-  </fieldset>
+ <fieldset>
+ <legend>Nagłówek grupy</legend>
+ <!-- Grupa interaktywnych elementów -->
+ </fieldset>
 
 
-  <fieldset>
-    <legend>Nagłówek grupy</legend>
-    !-- Grupa interaktywnych elementów -->
-  </fieldset>
+ <fieldset>
+ <legend>Nagłówek grupy</legend>
+ !-- Grupa interaktywnych elementów -->
+ </fieldset>
 
 
-  <button type="submit">Submit</button>
+ <button type="submit">Submit</button>
 </form>
 
 fieldset {
