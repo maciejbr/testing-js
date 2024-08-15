@@ -191,6 +191,8 @@ function foo() {
   console.log(value); // "I'm a local variable"
 }
 
+// Każda konstrukcja używająca nawiasów klamrowych {} (warunki, pętle, funkcje itp.) tworzy nowy lokalny zakres widoczności. Zmienne zadeklarowane w zakresie lokalnym mogą być używane tylko w tym bloku kodu.
+
 foo();
 console.log(value); // ReferenceError: value is not defined
 // Błąd: zmienna lokalna nie jest widoczna poza funkcją
