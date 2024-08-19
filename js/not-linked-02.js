@@ -81,6 +81,7 @@ if (age >= 18) {
 }
 
 console.log(type); // 'adult'
+
 //---- operator trójargumentowy:
 const age = 20;
 const type = age >= 18 ? "adult" : "child";
