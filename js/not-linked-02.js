@@ -177,7 +177,6 @@ console.log(getSubscriptionPrice("professional")); // 20
 
 console.log(Boolean(true)); // true
 console.log(Boolean(false)); // false
-
 console.log(Boolean(NaN)); // false
 console.log(Boolean(null)); // false
 console.log(Boolean(undefined)); // false
