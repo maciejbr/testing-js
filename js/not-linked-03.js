@@ -144,7 +144,7 @@ console.log(words.join("")); // 'JavaScriptisamazing'
 console.log(words.join(" ")); // 'JavaScript is amazing'
 console.log(words.join("-")); // 'JavaScript-is-amazing'
 
-// split(delimiter) - metoda ciągów. Pozwala ona na przekształcenie ciągu w tablicę poprzez podzielenie go przez określony delimiter - CZYM / CO dzielimy na elementy w tablicy
+// split(delimiter) - metoda ciągów. Pozwala ona na przekształcenie ciągu w tablicę poprzez podzielenie go przez określony delimiter - CZYM dzielimy z ciągu znaków na elementy w tablicy
 
 const name = "Mango";
 const letters = name.split("");
@@ -160,8 +160,8 @@ console.log(slugParts); // ["amazing", "french", "recipes"]
 
 // konwertuje ciągi z snake_case (notacja wężowa z podkreśleniami) na kebab-case (notacja z myślnikami)
 function transformString(string) {
-  const words = string.split("_");
-  return words.join("-");
+  const words = string.split("_"); // tu dzieli na obiekty w tablicy
+  return words.join("-"); // tu je łączy
 }
 
 transformString("user_age"); // "user-age"
@@ -235,7 +235,7 @@ const allClients = oldClients.concat(newClients);
 
 console.log(allClients); // ["Mango", "Ajax", "Poly", "Kiwi", "Peach", "Houston"] (6)
 
-// Metoda tablicowa indexOf(elem) jest używana do określenia indeksu pierwszego wystąpienia elementu elem w tablicy. Zwraca indeks elementu, jeśli został znaleziony, lub -1, jeśli element nie został znaleziony.
+// Metoda tablicowa indexOf(elem) jest używana do określenia indeksu pierwszego wystąpienia elementu "elem" w tablicy. Zwraca indeks elementu, jeśli został znaleziony, lub -1, jeśli element nie został znaleziony.
 const clients = ["Mango", "Ajax", "Poly", "Kiwi", "Poly"];
 console.log(clients.indexOf("Poly")); // 2
 console.log(clients.indexOf("Monkong")); // -1
@@ -276,7 +276,7 @@ for (let i = 0; i < 3; i += 1) {
 
 console.log(tags); // ["tag-0", "tag-1", "tag-2"]
 //-----
-// Metoda sort()
+// Metoda sort() ????
 //-----
 // Funkcja createArrayOfNumbers(min, max) przyjmuje dwa parametry:
 // min - liczba całkowita, od której rozpoczynają się obliczenia
