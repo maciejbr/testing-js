@@ -137,14 +137,14 @@ if (nonEmptyArray) {
 
 //---------  Metody tablicowe
 
-// join(delimiter)
+// join(delimiter) - metoda tablicowa CZYM złączyć elementy z tablicy w ciąg znaków
 
 const words = ["JavaScript", "is", "amazing"];
 console.log(words.join("")); // 'JavaScriptisamazing'
 console.log(words.join(" ")); // 'JavaScript is amazing'
 console.log(words.join("-")); // 'JavaScript-is-amazing'
 
-// split(delimiter)
+// split(delimiter) - metoda ciągów. Pozwala ona na przekształcenie ciągu w tablicę poprzez podzielenie go przez określony delimiter - CZYM / CO dzielimy na elementy w tablicy
 
 const name = "Mango";
 const letters = name.split("");
