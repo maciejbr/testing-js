@@ -386,3 +386,393 @@ fetchUserFromServer(
 	user => console.log(user), 
 	error => console.error(error)
 );
+
+//------- Promisyfikacja -------
+
+// Wywołania zwrotne kontra obietnice
+
+const fetchUserFromServer = (username, onSuccess, onError) => {
+  // ...
+};
+
+// Aby zwrócić wynik operacji asynchronicznej, należy zwrócić obietnicę z funkcji.
+
+// Promisyfikacja  — to przekształcenie funkcji z wywołaniami zwrotnymi tak, aby nie akceptowała wywołań zwrotnych, ale zwracała obietnicę. Taka funkcja jest nazywana funkcją promisyfikowaną.
+
+// Promisyfikowanie funkcji
+
+// Uzupełnijmy kod do pracy z funkcją fetchUserFromServer wywołując ją i przekazując argumenty dla nazwy użytkownika i wywołań zwrotnych przetwarzania wyników.
+
+const fetchUserFromServer = (username, onSuccess, onError) => {
+  console.log(`Fetching data for ${username}`);
+};
+
+fetchUserFromServer(
+	"Mango", 
+	user => console.log(user), 
+	error => console.error(error)
+);
+
+// Następnie użyjemy timera, aby zasymulować operację asynchroniczną i wywołać wywołania zwrotne za pomocą warunku. Możemy zmienić wartość zmiennej isSuccess na true lub false, aby zasymulować stan operacji asynchronicznej.
+
+const fetchUserFromServer = (username, onSuccess, onError) => {
+  console.log(`Fetching data for ${username}`);
+
+  setTimeout(() => {
+    // Change value of isSuccess variable to simulate request status
+    const isSuccess = true;
+
+    if (isSuccess) {
+      onSuccess("success value");
+    } else {
+      onError("error");
+    }
+  }, 2000);
+};
+
+fetchUserFromServer(
+	"Mango", 
+	user => console.log(user), 
+	error => console.error(error)
+);
+
+// Jak już zauważyliśmy, funkcja wie obecnie zbyt wiele o kodzie, który wykorzysta wynik jej pracy. Oznacza to, że przekazujemy coś wewnątrz funkcji (wywołanie zwrotne) i mamy nadzieję, że zadziała poprawnie, co jest niepewne. Promisyfikujmy ją.
+
+// Najpierw napiszmy kod, który zwróci obietnicę z funkcji. Aby to zrobić, utwórz w niej obietnicę za pomocą new Promise i zwróćmy ją.
+
+const fetchUserFromServer = username => {
+  return new Promise((resolve, reject) => {
+		// ...
+  });
+};
+
+// Otrzymujemy obietnicę w kodzie zewnętrznym i dodajemy do niej procedury obsługi w metodach then і catch.
+
+const fetchUserFromServer = username => {
+  return new Promise((resolve, reject) => {
+		// ...
+  });
+};
+
+const userPromise = fetchUserFromServer("Mango"); // wynikiem wywołania fetchUserFromServer("Mango") będzie obietnica
+
+// przetwarzamy obietnicę w metodach then() i catch()
+userPromise
+	.then(user => console.log(user))
+  .catch(error => console.error(error));
+
+// Programy obsługi zazwyczaj dodają obietnicę do wyniku wywołania funkcji bez zapisywania jej w dodatkowej zmiennej.
+
+const fetchUserFromServer = username => {
+  return new Promise((resolve, reject) => {
+		// ...
+  });
+};
+
+fetchUserFromServer("Mango")  // wynikiem wywołania fetchUserFromServer("Mango") będzie obietnica
+	.then(user => console.log(user))  // przetwarzamy obietnicę w metodzie then()
+  .catch(error => console.error(error));  // przetwarzamy obietnicę w metodzie catch()
+
+// Cały kod związany z logiką pracy dodajemy wewnątrz funkcji tworzenia obietnicy.
+
+const fetchUserFromServer = username => {
+  return new Promise((resolve, reject) => {
+    console.log(`Fetching data for ${username}`);
+
+    setTimeout(() => {
+      // Change value of isSuccess variable to simulate request status
+      const isSuccess = true;
+
+      if (isSuccess) {
+        resolve("success value");  // wartością parametru resolve będzie funkcja zwrotna metody then()
+      } else {
+        reject("error");  // wartością parametru reject będzie funkcja wywołania zwrotnego metody catch()
+      }
+    }, 2000);
+  });
+};
+
+fetchUserFromServer("Mango")
+  .then(user => console.log(user))
+  .catch(error => console.error(error));
+
+// Większość nowoczesnych bibliotek opiera się na obietnicach. Kiedy wywołujesz metodę dla operacji asynchronicznej, jej wynik jest dostępny jako obietnica, do której możesz dołączyć procedury obsługi w metodach then() і catch().
+
+Promise.resolve() Promise.reject() // to statyczne metody tworzenia obietnic, które są rozwiązywane lub odrzucane natychmiastowo. Działają podobnie do new Promise(), zwracając obietnicę, ale mają krótszą składnię.
+
+// W ten sposób tworzona jest pomyślnie wykonana obietnica przy użyciu new Promise():
+
+new Promise(resolve => resolve("success value"))
+	.then(value => console.log(value));
+	.catch(error => console.log(error));
+
+// W ten sposób tworzona jest pomyślnie wykonana obietnica przy użyciu Promise.resolve():
+
+Promise.resolve("success value");
+	.then(value => console.log(value));
+	.catch(error => console.log(error));
+
+// W ten sposób tworzona jest obietnica, która nie powiodła się za pomocą new Promise():
+
+new Promise((resolve, reject) => reject("error"));
+	.then(value => console.log(value));
+	.catch(error => console.log(error));
+
+// W ten sposób tworzona jest obietnica, która nie powiodła się za pomocą Promise.reject():
+
+Promise.reject("error");
+	.then(value => console.log(value));
+	.catch(error => console.log(error));
+
+
+// Promisyfikowanie funkcji synchronicznych
+
+// Metody Promise.resolve і Promise.reject są używane do promisyfikowania funkcji, gdy nie musisz czekać na wynik operacji asynchronicznej, ale po prostu chcesz zbudować łańcuch obietnic i masz już wartość początkową.
+
+// Przeprowadźmy refaktoryzację kodu funkcji, która akceptuje dwa wywołania zwrotne i wywołuje je według warunku.
+
+const makeGreeting = (guestName, onSuccess, onError) => {
+  if (!guestName) {
+    onError("Guest name must not be empty");
+  } else {
+		onSuccess(`Welcome ${guestName}`);
+	}
+};
+
+makeGreeting(
+  "Mango",
+  greeting => console.log(greeting),
+  error => console.error(error)
+);
+
+// Promisyfikujmy funkcję makeGreeting, aby całkowicie wyeliminować jej zależność od zewnętrznego kodu. Powinna ona po prostu zwracać obietnicę.
+
+const makeGreeting = guestName => {
+	return new Promise((resolve, reject) => {
+		  if (!guestName) {
+				reject("Guest name must not be empty");
+		  } else {
+				resolve(`Welcome ${guestName}`);
+			}
+	})
+};
+
+makeGreeting("Mango")
+  .then(greeting => console.log(greeting))
+  .catch(error => console.error(error));
+
+// Teraz użyjmy metod klasy Promise, aby zmniejszyć ilość kodu.
+
+const makeGreeting = guestName => {
+  if (!guestName) {
+   return Promise.reject("Guest name must not be empty");
+  } else {
+		return Promise.resolve(`Welcome ${guestName}`);
+	}
+};
+
+makeGreeting("Mango")
+  .then(greeting => console.log(greeting))
+  .catch(error => console.error(error));
+
+// Zamiast przyjmować callbacki i je wywoływać, funkcja zwraca obietnicę (return) do zewnętrznego kodu. Dalszy los tej obietnicy nie leży już w gestii funkcji.
+
+// Tworzenie opóźnionej obietnicy
+
+// Stwórzmy funkcję makePromise(options), która będzie tworzyć i zwracać obietnice z różnymi opóźnieniami wykonania.
+
+const makePromise = options => {	
+	// ...
+};
+
+makePromise({
+	value: "Some value",
+	delay: 2000,
+	shouldResolve: true
+})
+
+// Funkcja przyjmuje jeden parametr options. Jest to obiekt z właściwościami, w których przekażemy następujące wartości:
+// value — wartość, która będzie wartością obietnicy.
+// delay — opóźnienie w milisekundach, po którym obietnica zostanie wykonana.
+// shouldResolve — wartość logiczna wskazująca, czy obietnica powinna zostać wykonana (true) czy odrzucona (false).
+
+// Uzupełnijmy kod funkcji tak, aby zwracała obietnicę.
+
+const makePromise = options => {
+  return new Promise((resolve, reject) => {
+		// ...
+  });
+};
+
+// Następnie sprawmy, aby obietnica została wykonana lub odrzucona z wartością określoną we właściwości value po opóźnieniu wynoszącym delay milisekund. Domyślnie obietnica zostanie wykonana pomyślnie, w tym celu określamy domyślną wartość true dla właściwości shouldResolve podczas destrukturyzacji.
+
+const makePromise = ({ value, delay, shouldResolve = true }) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+			if(shouldResolve) {
+				resolve(value)
+			} else {
+				reject(value)
+			}
+		}, delay);
+  });
+};
+
+// Jest to więc tylko ponownie wykorzystana funkcja, która zawiera kod do tworzenia obietnicy z opóźnieniem, dzięki czemu nie musisz pisać tego kodu za każdym razem, gdy musisz utworzyć obietnicę.
+
+// Przetestujmy tę funkcję, tworząc kilka obietnic z różnym czasem opóźnienia i różnymi wartościami.
+
+const makePromise = ({ value, delay, shouldResolve = true }) => {
+  return new Promise((resolve, reject) => {
+	   setTimeout(() => {
+				if(shouldResolve) {
+					resolve(value)
+				} else {
+					reject(value)
+				}
+			}, delay);
+  });
+};
+
+makePromise({ value: "A", delay: 1000 })
+	.then(value => console.log(value)) // "A"
+	.catch(error => console.log(error));
+
+makePromise({ value: "B", delay: 3000 })
+	.then(value => console.log(value)) // "B"
+	.catch(error => console.log(error));
+
+makePromise({ value: "C", delay: 2000, shouldResolve: false })
+	.then(value => console.log(value)) 
+	.catch(error => console.log(error)); // "C"
+
+// Bez funkcji ten sam kod wyglądałby następująco:
+
+new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Fulfilled A');
+  }, 1000);
+})
+  .then(value => console.log(value))
+  .catch(error => console.log(error));
+
+new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Fulfilled B');
+  }, 3000);
+})
+  .then(value => console.log(value))
+  .catch(error => console.log(error));
+
+new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject('Rejected C');
+  }, 2000);
+})
+  .then(value => console.log(value))
+  .catch(error => console.log(error)); // "Rejected C"
+
+//
+
+//------- Obsługa wielu obietnic -------
+
+// Metoda Promise.all()
+
+// Istnieją sytuacje, w których musisz poczekać na spełnienie wszystkich obietnic jednocześnie, a następnie przetworzyć ich wyniki. Lub sytuacje, w których wystarczy poczekać na wykonanie co najmniej jednej z nich, ignorując inne przypadki. Dla tych scenariuszy klasa Promise posiada statyczne metody do pracy z grupą obietnic.
+
+Promise.all() // ta metoda pozwala na jednoczesne przetworzenie kilku obietnic i uzyskanie ich wyników. Pobiera ona tablicę obietnic jako dane wejściowe, czeka na ich wykonanie i zwraca jedną obietnicę.
+
+Promise.all([promise1, promise2, promise3, ...])
+
+// Jeśli wszystkie obietnice zostaną wykonane pomyślnie, zwrócona obietnica zostanie ustawiona na stan fulfilled, a jej wartość będzie tablicą wyników każdej obietnicy.
+
+const p1 = Promise.resolve(1);
+const p2 = Promise.resolve(2);
+const p3 = Promise.resolve(3);
+
+Promise.all([p1, p2, p3])
+	.then(values => console.log(values)); // [1, 2, 3]
+	.catch(error => console.log(error));
+
+// Oznacza to, że funkcja czeka na spełnienie wszystkich obietnic, a następnie tworzy i zwraca nową obietnicę, której wartość jest tablicą wartości spełnionych obietnic.
+
+// Jeśli co najmniej jedna z obietnic zostanie odrzucona, zwrócona obietnica natychmiast przejdzie w stan rejected, a jej wartością będzie błąd.
+
+const p1 = Promise.resolve(1);
+const p2 = Promise.reject("Rejected promise 2");
+const p3 = Promise.resolve(3);
+
+Promise.all([p1, p2, p3])
+	.then(values => console.log(values))
+	.catch(error => console.log(error)); // "Rejected promise 2"
+
+
+// Metoda Promise.allSettled()
+
+Promise.allSettled() // również pozwala na przetwarzanie wielu obietnic i uzyskiwanie ich wyników w tym samym czasie. Przyjmuje tablicę obietnic jako dane wejściowe, czeka na ich wykonanie i zwraca pojedynczą obietnicę.
+
+Promise.allSettled([promise1, promise2, promise3, ...])
+
+// Różnica w stosunku do Promise.all polega na tym, że metoda Promise.allSettled() oczekuje na wykonanie wszystkich obietnic, niezależnie od tego, czy niektóre lub nawet wszystkie obietnice zostały odrzucone.
+
+// Zwrócona obietnica nigdy nie zostanie odrzucona, zawsze zostanie pomyślnie wykonana (stan fulfilled). Dodawanie metody catch nie ma nawet sensu, ponieważ nigdy nie zostanie ona wykonana.
+
+const p1 = Promise.resolve(1);
+const p2 = Promise.reject("Rejected promise 2");
+const p3 = Promise.resolve(3);
+
+Promise.allSettled([p1, p2, p3])
+	.then(values => console.log(values));
+	// [
+	//   { status: "fulfilled", value: 1},
+  //   { status: "rejected", value: "Rejected promise 2"},
+  //   { status: "fulfilled", value: 3}
+  // ]
+
+// Wartością zwróconej obietnicy będzie tablica obiektów z wynikami każdej obietnicy.
+// status — właściwość przechowująca status, z jakim obietnica została wykonana, jest to ciąg "fulfilled" lub "rejected".
+//   value — właściwość przechowująca wartość, z jaką obietnica została spełniona lub odrzucona.
+
+// Metoda Promise.race()
+
+Promise.race // przyjmuje tablicę obietnic i zwraca "najszybszą", tj. pierwszą ukończoną lub odrzuconą obietnicę z przekazanych, wraz z wartością lub powodem jej odrzucenia.
+
+Promise.race([promise1, promise2, promise3, ...])
+
+// Przypadek 1
+// Stwórzmy kilka obietnic z różnym czasem wykonania.
+
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve(1), 1000);
+});
+
+const p2 = new Promise((resolve, reject) => {
+  setTimeout(() => reject(2), 2000);
+});
+
+Promise.race([p1, p2])
+	.then(value => console.log(value)); // 1
+	.catch(error => console.log(error));
+
+// Pierwsza obietnica wejdzie w stan fulfilled po 1 sekundzie (będzie najszybsza), i zostanie wykonane wywołanie zwrotne metody then z wartością pierwszej obietnicy, a pozostałe zostaną odrzucone.
+
+// Gdy co najmniej jedna obietnica z tablicy zostanie wykonana, zwrócona obietnica przejdzie do stanu resolved, a wszystkie pozostałe zostaną odrzucone
+
+// Przypadek 2
+// Stwórzmy kilka obietnic z różnym czasem wykonania.
+
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve(1), 2000);
+});
+
+const p2 = new Promise((resolve, reject) => {
+  setTimeout(() => rejected(2), 1000);
+});
+
+Promise.race([p1, p2])
+	.then(value => console.log(value)); 
+	.catch(error => console.log(error)); // 2
+
+// Druga obietnica wejdzie w stan rejected po 1 sekundzie (będzie najszybsza), zostanie wykonane wywołanie zwrotne metody catch z wartością drugiej obietnicy, a pozostałe zostaną odrzucone.
+
+// Gdy co najmniej jedna obietnica z tablicy zostanie odrzucona, zwrócona obietnica przejdzie do stanu rejected, a wszystkie pozostałe zostaną odrzucone.
