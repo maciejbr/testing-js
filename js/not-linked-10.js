@@ -331,3 +331,58 @@ promise
   .finally(() => {
     console.log("finally");
   });
+
+
+//------ Promisyfikacja ------
+
+// Wywołania zwrotne kontra obietnice
+// Wyobraźmy sobie, że mamy funkcję, która wykonuje operację asynchroniczną, na przykład żądanie do serwera o udzielenie informacji o użytkowniku według jego nazwy.
+
+const fetchUserFromServer = (username, onSuccess, onError) => {
+  // ...
+};
+
+// Obecnie funkcja wie zbyt wiele o kodzie, który wykorzysta wynik jej pracy. Oczekuje ona wywołań zwrotnych dla pomyślnego żądania (onSuccess) i błędu (onError) i będzie odpowiedzialna za ich wywołanie w określonych warunkach.
+
+// Lepiej będzie, jeśli funkcja nie będzie przejmować się kodem, który wykorzysta jej wynik, a będzie po prostu wykonywać operację i zwracać wynik swojej pracy do zewnętrznego kodu. Aby zwrócić wynik operacji asynchronicznej, należy zwrócić obietnicę z funkcji.
+
+// Promisyfikacja  — to przekształcenie funkcji z wywołaniami zwrotnymi tak, aby nie akceptowała wywołań zwrotnych, ale zwracała obietnicę. Taka funkcja jest nazywana funkcją promisyfikowaną.
+
+// Funkcja promisykowana - funkcja, która zwraca obietnicę
+
+// Promisyfikowanie funkcji
+
+// Uzupełnijmy kod do pracy z funkcją fetchUserFromServer wywołując ją i przekazując argumenty dla nazwy użytkownika i wywołań zwrotnych przetwarzania wyników.
+
+const fetchUserFromServer = (username, onSuccess, onError) => {
+  console.log(`Fetching data for ${username}`);
+};
+
+fetchUserFromServer(
+	"Mango", 
+	user => console.log(user), 
+	error => console.error(error)
+);
+
+// Następnie użyjemy timera, aby zasymulować operację asynchroniczną i wywołać wywołania zwrotne za pomocą warunku. Możemy zmienić wartość zmiennej isSuccess na true lub false, aby zasymulować stan operacji asynchronicznej.
+
+const fetchUserFromServer = (username, onSuccess, onError) => {
+  console.log(`Fetching data for ${username}`);
+
+  setTimeout(() => {
+    // Change value of isSuccess variable to simulate request status
+    const isSuccess = true;
+
+    if (isSuccess) {
+      onSuccess("success value");
+    } else {
+      onError("error");
+    }
+  }, 2000);
+};
+
+fetchUserFromServer(
+	"Mango", 
+	user => console.log(user), 
+	error => console.error(error)
+);
