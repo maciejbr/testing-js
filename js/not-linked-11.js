@@ -175,3 +175,5 @@ Access-Control-Allow-Origin: *
 // Przeglądarka jest więc rodzajem pośrednika między kodem JavaScript a backendem. Dodaje nagłówek Origin z prawidłową wartością do każdego żądania i sprawdza obecność nagłówka Access-Control-Allow-Origin w odpowiedzi. Jeśli nagłówek jest obecny, a jego wartość jest odpowiednia, oryginalne żądanie zostanie wykonane, a kod JavaScript otrzyma wynik. W przeciwnym razie zostanie wygenerowany błąd CORS.
 
 //------- AJAX -------
+
+// AJAX (Asynchronous JavaScript and XML) to metoda odbierania lub wysyłania danych, a następnie aktualizowania interfejsu na podstawie tych danych, bez konieczności przeładowywania strony. Skraca to czas odpowiedzi i sprawia, że strona internetowa jest bardziej interaktywna.
