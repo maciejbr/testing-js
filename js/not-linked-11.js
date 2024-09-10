@@ -304,3 +304,154 @@ const url = `https://jsonplaceholder.typicode.com/users?${searchParams}`;
 console.log(url); // "<https://jsonplaceholder.typicode.com/users?_limit=5&_sort=name>"
 
 // W postaci ciągu znaków właściwości obiektu staną się parametrami i ich wartościami. Parametry będą oddzielone znakiem &. Podczas interpolacji wartości w szablonach ciągów znaków, zostaje niejawnie przekonwertowana na ciąg znaków. Więc nie ma potrzeby wywoływania metody toString() podczas tworzenia adresu URL. Nie zapomnij rozpocząć ciąg od znaku ?.
+
+//------- Zmiana danych -------
+
+// CRUD
+
+// Do interakcji z zasobami backendu używane są cztery operacje:
+// tworzenie (create);
+// odczyt (read);
+// aktualizacja (update);
+// usuwanie (delete).
+
+// Dla każdego z nich zdefiniowana jest standardowa metoda HTTP.
+// POST (Create) — utworzenie nowego zasobu.
+// GET (Read) — pobranie zestawu zasobów lub pojedynczego zasobu według identyfikatora.
+// PUT і PATCH (Update) — aktualizacja zasobu według identyfikatora.
+// DELETE (Delete) — usunięcie zasobu według identyfikatora.
+
+// Pobieranie całej kolekcji
+
+fetch("<https://jsonplaceholder.typicode.com/posts>")
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
+  })
+  .then((posts) => console.log(posts))
+  .catch((error) => console.log(error));
+
+// Pobieranie pojedynczego elementu
+
+// Pobierzmy jeden post według jego identyfikatora (właściwość id), dodając go do zasobu /posts/:postId.
+
+// Ostatnia część tej ścieżki (:postId) nazywana jest parametrem dynamicznym i jest opisana w dokumentacji jako /resource/:parameter. Parametry dynamiczne są rozróżniane przez dwukropek: na początku. Używany jest on tylko do wskazania, że jest to parametr dynamiczny, ale nie jest zawarty w samym ciągu zapytania. Użycie parametrów dynamicznych nie zmienia samego zasobu (ścieżki do całej kolekcji), ale zmienia wartość parametru dynamicznego dla każdego z jego elementów.
+
+// Change this number to fetch different post
+const postId = 1;
+
+fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
+  })
+  .then(post => console.log(post))
+  .catch(error => console.log(error));
+
+// Tworzenie
+
+// Metoda fetch() powinna wysłać żądanie POST do serwera, w którego ciele będzie znajdował się obiekt z polami title i body, identyfikator zostanie automatycznie utworzony przez backend. Wynikiem tego żądania zostanie obiekt dodany do bazy danych backendu.
+
+const postToAdd = {
+  title: "CRUD",
+  body: "CRUD is awesome!",
+};
+
+const options = {
+  method: "POST",
+  body: JSON.stringify(postToAdd),
+  headers: {
+    "Content-Type": "application/json; charset=UTF-8",
+  },
+};
+
+fetch("<https://jsonplaceholder.typicode.com/posts>", options)
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
+  })
+  .then(post => console.log(post))
+  .catch(error => console.log(error));
+
+// W powyższym przykładzie:
+// Wykonujemy żądanie o utworzenie postu, odwołując się do zasobu /posts, ale w obiekcie konfiguracyjnym options metody fetch() zmieniamy metodę HTTP na POST. W ten sposób backend wie, że musi utworzyć nowy zasób w tej kolekcji, zamiast odczytywać istniejący.
+// Ciało żądania musi być ciągiem znaków, ponieważ protokół HTTP przesyła wszystko jako tekst. Podczas przesyłania złożonych typów danych, należy je przekształcić na ciąg znaków za pomocą metody JSON.stringify().
+// Nie zapomnij określić nagłówka Content-Type, który wskazuje typ danych przesyłanych do backendu.
+
+// W odpowiedzi, jeśli wszystko jest w porządku, otrzymamy reprezentację JSON nowo utworzonego postu, ale z dodanym id. Identyfikator będzie unikalny dla każdego obiektu.
+
+{
+  "id": 101,
+  "title": "CRUD",
+  "body": "CRUD is awesome!"
+}
+
+// Aktualizacja
+
+// Metody PUT i PATCH są używane do aktualizacji istniejących danych.
+// Zgodnie ze standardem HTTP:
+// metoda PATCH zamienia wartości, które zostały przekazane w ciele żądania w istniejącym zasobie. Wartości zasobu, które nie były przekazane, pozostaną niezmienione;
+// metoda PUT całkowicie zamienia zasób. Wartości zasobu, które nie zostały przekazane, są usuwane z zasobu.
+
+// Wybór metody do zastosowania zostanie opisany w dokumentacji backendu.
+// Metoda fetch() musi wysłać żądanie do serwera, w którego ciele należy określić obiekt z polami do zmiany. Ścieżka wskazuje, w której kolekcji i który element ma zostać zaktualizowany. Po otrzymaniu żądania backend przetworzy je i zwróci zaktualizowany zasób w odpowiedzi.
+
+// Change value of id property to update different post
+const postToUpdate = {
+  id: 1,
+  body: "CRUD is really awesome!",
+};
+
+const options = {
+  method: "PATCH",
+  body: JSON.stringify(postToUpdate),
+  headers: {
+    "Content-Type": "application/json; charset=UTF-8",
+  },
+};
+
+fetch(`https://jsonplaceholder.typicode.com/posts/${postToUpdate.id}`, options)
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
+  })
+  .then(post => console.log(post))
+  .catch(error => console.log("ERROR:", error));
+
+// W odpowiedzi, jeśli wszystko pójdzie dobrze, otrzymamy zaktualizowany obiekt.
+
+{
+  id: 1,
+  title: "CRUD",
+  body: "CRUD is really awesome!",
+}
+
+// Usunięcie
+
+// Metoda DELETE jest używana do usuwania istniejących danych.
+
+// Metoda fetch() musi wysłać żądanie DELETE do serwera bez ciała. Ścieżka wskazuje, w której kolekcji i który element chcemy usunąć.
+
+// Po otrzymaniu żądania backend przetworzy je, usunie zasób z kolekcji i zwróci status rezultatu oraz usunięty element w odpowiedzi.
+
+const postIdToDelete = 1;
+
+fetch(`https://jsonplaceholder.typicode.com/posts/${postIdToDelete}`, {
+  method: "DELETE",
+})
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
+  })
+  .then((deletedPost) => console.log(deletedPost))
+  .catch(error => console.log("Error:", error));
