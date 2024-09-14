@@ -196,3 +196,7 @@ axios.get("<https://jsonplaceholder.typicode.com/users>", {
 });
 
 // Axios wykorzystuje ten obiekt, aby dodać parametry żądania do adresu przy użyciu URLSearchParams.
+
+//-------- Składnia async/await --------
+
+// Funkcje asynchroniczne
